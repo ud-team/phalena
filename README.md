@@ -5,4 +5,5 @@ To Be Done
 ## Planned features
 * New homepage
 * Dark mode
+* Self signing
 * More soon!
