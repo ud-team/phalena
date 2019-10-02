@@ -4,10 +4,10 @@
 
 <dict>
     <key>CFBundleExecutable</key>
-    <string>CydiaAppliance</string>
+    <string>PhalenaAppliance</string>
 
     <key>CFBundleIdentifier</key>
-    <string>com.saurik.Cydia</string>
+    <string>com.saurik.Phalena</string>
 
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
@@ -48,7 +48,7 @@
     <string>3.0</string>
 
     <key>NSPrincipalClass</key>
-    <string>CydiaAppliance</string>
+    <string>PhalenaAppliance</string>
 
     <key>UIDeviceFamily</key>
     <array>

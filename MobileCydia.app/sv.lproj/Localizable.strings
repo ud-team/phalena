@@ -1,5 +1,5 @@
 "ABOUT" = "Om";
-"ABOUT_CYDIA" = "Om Cydia installerare";
+"ABOUT_PHALENA" = "Om Phalena installerare";
 "ACCEPT_NEW_COPY" = "Acceptera ny kopia";
 "ADD" = "Lägg till";
 "ADD_ANYWAY" = "Lägg till ändå";
@@ -25,7 +25,7 @@
 "CLEAN_ARCHIVES" = "Rensa arkiven";
 "CLEAR" = "Rensa";
 "CLOSE" = "Avsluta";
-"CLOSE_CYDIA" = "Avsluta Cydia";
+"CLOSE_PHALENA" = "Avsluta Phalena";
 "COLON_DELIMITED" = "%@: %@";
 "COMING_SOON" = "Kommer snart!";
 "COMMA_DELIMITED" = "%@, %@";
@@ -40,7 +40,7 @@
 "CONTINUE_QUEUING" = "Fortsätt köa";
 "COUNTS_NONZERO_EX" = "Hmm, ett fel har inträffat. Summan blev inte noll. APT... Borde inte kunna inträffa.";
 "CREDITS" = "Beröm";
-"CYDIA_STORE" = "Cydia Store";
+"PHALENA_STORE" = "Phalena Store";
 "DATABASE" = "Databas";
 "DETAILS" = "Information";
 "DEVELOPER" = "Utvecklare";
@@ -57,13 +57,13 @@
 "EDIT" = "Ändra";
 "ELISION" = "%@...";
 "ENTERED_BY_USER" = "Angivet av användaren";
-"ENTER_APT_URL" = "Ange Cydia/APT URL";
+"ENTER_APT_URL" = "Ange Phalena/APT URL";
 "ERROR" = "Fel";
 "ESSENTIAL_UPGRADE" = "Nödvändig uppgradering";
 "ESSENTIAL_UPGRADES" = "%d nödvändiga uppgraderingar";
 "ESSENTIAL_UPGRADE_EX" = "Ett eller flera nödvändiga paket är inaktuella. Om de inte uppgraderas kommer sannolikt olika fel uppstå.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Cydia avslutas när det är klart.)";
+"EXIT_WHEN_COMPLETE" = "(Phalena avslutas när det är klart.)";
 "EXPANDED_SIZE" = "Expanderad storlek";
 "EXPERT" = "Expert";
 "FAQ" = "FAQ";
@@ -155,7 +155,7 @@
 "RELOAD_SPRINGBOARD" = "Starta om SpringBoard";
 "REMOVE" = "Ta bort";
 "REMOVING_ESSENTIALS" = "Tar bort nödvändiga";
-"REMOVING_ESSENTIALS_EX" = "Den här åtgärden medför borttagandet av ett eller flera paket som Cydia eller iOS kräver för att kunna fungera. Om du utför åtgärden är det inte säkert att du kan använda Cydia för att reparera eventuella problem.";
+"REMOVING_ESSENTIALS_EX" = "Den här åtgärden medför borttagandet av ett eller flera paket som Phalena eller iOS kräver för att kunna fungera. Om du utför åtgärden är det inte säkert att du kan använda Phalena för att reparera eventuella problem.";
 "REPAIRING" = "Reparerar";
 "REPOSITORY_SIGNATURE" = "Granska signaturen av källan";
 "REQUEST_ADVERTISING_SPACE" = "Begär annonsplats";
@@ -163,8 +163,8 @@
 "RESTART_SPRINGBOARD" = "Starta om SpringBoard";
 "RESUBMIT_FORM" = "Är du säker på att du vill skicka detta formulär igen?";
 "RESUMING_AT" = "Återupptar vid";
-"RETURN_TO_CYDIA" = "Återgå till Cydia";
-"ROLE_EX" = "Alla paket som är tillgängliga i Cydia är inte avsedda att installeras av alla användare. Ange vilken typ av användare du är så att Cydia kan filtrera dem.\n\nDetta kan ändras från \"Inställningar\" på fliken \"Hantera\" (iPhone och iPod Touch) eller fliken \"Källor\" (iPad).";
+"RETURN_TO_PHALENA" = "Återgå till Phalena";
+"ROLE_EX" = "Alla paket som är tillgängliga i Phalena är inte avsedda att installeras av alla användare. Ange vilken typ av användare du är så att Phalena kan filtrera dem.\n\nDetta kan ändras från \"Inställningar\" på fliken \"Hantera\" (iPhone och iPod Touch) eller fliken \"Källor\" (iPad).";
 "RUNNING" = "Pågående";
 "SAFE" = "Säker";
 "SAMPLE" = "Prov";
@@ -198,7 +198,7 @@
 "TEMPORARY_IGNORE" = "Ignorera (tillfälligt)";
 "THANK_YOU" = "Tack";
 "UNABLE_TO_COMPLY" = "Kan inte uppfylla";
-"UNABLE_TO_COMPLY_EX" = "Den här åtgärden medför att ett eller flera grundläggande paket tas bort vilka Cydia eller iOS kräver tillgång till för att fungera felfritt. För att fortsätta och utföra åtgärden måste du aktivera Avancerad i Inställningar,";
+"UNABLE_TO_COMPLY_EX" = "Den här åtgärden medför att ett eller flera grundläggande paket tas bort vilka Phalena eller iOS kräver tillgång till för att fungera felfritt. För att fortsätta och utföra åtgärden måste du aktivera Avancerad i Inställningar,";
 "UNABLE_TO_LOAD" = "Kunde inte ladda";
 "UNKNOWN" = "Okänd";
 "UNSAFE" = "Osäker";
@@ -215,6 +215,6 @@
 "VERIFYING_URL" = "Verifierar URL";
 "VERSION" = "Version";
 "WARNING" = "Varning";
-"WELCOME_TO_CYDIA" = "Välkommen till Cydia™";
+"WELCOME_TO_PHALENA" = "Välkommen till Phalena™";
 "WHO_ARE_YOU" = "Vem är du?";
 "YES" = "Ja";

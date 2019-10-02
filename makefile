@@ -101,11 +101,11 @@ libs += -licucore
 uikit := 
 uikit += -framework UIKit
 
-dirs := Menes CyteKit Cydia SDURLCache
+dirs := Menes CyteKit Phalena SDURLCache
 
 code := $(foreach dir,$(dirs),$(wildcard $(foreach ext,h hpp c cpp m mm,$(dir)/*.$(ext))))
 code := $(filter-out SDURLCache/SDURLCacheTests.m,$(code))
-code += MobileCydia.mm Version.mm iPhonePrivate.h Cytore.hpp lookup3.c Sources.h Sources.mm DiskUsage.cpp
+code += MobilePhalena.mm Version.mm iPhonePrivate.h Cytore.hpp lookup3.c Sources.h Sources.mm DiskUsage.cpp
 
 code += gpgv.cc
 code += http.cc
@@ -194,15 +194,15 @@ cycc += $(flag64)
 
 plus += -std=c++11
 
-images := $(shell find MobileCydia.app/ -type f -name '*.png')
+images := $(shell find MobilePhalena.app/ -type f -name '*.png')
 images := $(images:%=Images/%)
 
-lproj_deb := debs/cydia-lproj_$(version)_iphoneos-arm.deb
+lproj_deb := debs/phalena-lproj_$(version)_iphoneos-arm.deb
 
-all: MobileCydia
+all: MobilePhalena
 
 clean:
-	rm -f MobileCydia postinst
+	rm -f MobilePhalena postinst
 	rm -rf Objects/ Images/
 
 Objects/apt64/apt-pkg/tagfile.o: Objects/apt64/apt-pkg/tagfile-keys.h
@@ -278,7 +278,7 @@ Objects/libapt64.a: $(libapt64)
 	@echo "[arch] $@"
 	@ar -rc $@ $^
 
-MobileCydia: $(object) entitlements.xml $(lapt)
+MobilePhalena: $(object) entitlements.xml $(lapt)
 	@echo "[link] $@"
 	@$(cycc) -o $@ $(filter %.o,$^) $(link) $(libs) $(uikit) -Wl,-sdk_version,8.0
 	@mkdir -p bins
@@ -306,9 +306,9 @@ postinst: postinst.mm CyteKit/stringWith.mm CyteKit/stringWith.h CyteKit/UCPlatf
 	$(cycc) $(plus) -o $@ $(filter %.mm,$^) $(flag) $(link) -framework CoreFoundation -framework Foundation -framework UIKit
 	@ldid -T0 -S $@
 
-debs/cydia_$(version)_iphoneos-arm.deb: MobileCydia preinst postinst cfversion setnsfpn cydo $(images) $(shell find MobileCydia.app) cydia.control Library/firmware.sh Library/move.sh Library/startup
+debs/phalena_$(version)_iphoneos-arm.deb: MobilePhalena preinst postinst cfversion setnsfpn cydo $(images) $(shell find MobilePhalena.app) phalena.control Library/firmware.sh Library/move.sh Library/startup
 	sudo rm -rf _
-	mkdir -p _/var/lib/cydia
+	mkdir -p _/var/lib/phalena
 	
 	mkdir -p _/etc/apt
 	mkdir _/etc/apt/apt.conf.d
@@ -317,61 +317,61 @@ debs/cydia_$(version)_iphoneos-arm.deb: MobileCydia preinst postinst cfversion s
 	cp -a Sources.list _/etc/apt/sources.list.d
 	
 	mkdir -p _/usr/libexec
-	cp -a Library _/usr/libexec/cydia
-	cp -a sysroot/usr/bin/du _/usr/libexec/cydia
-	cp -a cfversion _/usr/libexec/cydia
-	cp -a setnsfpn _/usr/libexec/cydia
+	cp -a Library _/usr/libexec/phalena
+	cp -a sysroot/usr/bin/du _/usr/libexec/phalena
+	cp -a cfversion _/usr/libexec/phalena
+	cp -a setnsfpn _/usr/libexec/phalena
 	
-	cp -a cydo _/usr/libexec/cydia
+	cp -a cydo _/usr/libexec/phalena
 	
 	mkdir -p _/Library
 	cp -a LaunchDaemons _/Library/LaunchDaemons
 	
 	mkdir -p _/Applications
-	cp -a MobileCydia.app _/Applications/Cydia.app
-	rm -rf _/Applications/Cydia.app/*.lproj
-	cp -a MobileCydia _/Applications/Cydia.app/Cydia
+	cp -a MobilePhalena.app _/Applications/Phalena.app
+	rm -rf _/Applications/Phalena.app/*.lproj
+	cp -a MobilePhalena _/Applications/Phalena.app/Phalena
 	
-	for meth in bzip2 gzip lzma gpgv http https store $(methods); do ln -s Cydia _/Applications/Cydia.app/"$${meth}"; done
+	for meth in bzip2 gzip lzma gpgv http https store $(methods); do ln -s Phalena _/Applications/Phalena.app/"$${meth}"; done
 	
-	cd MobileCydia.app && find . -name '*.png' -exec cp -af ../Images/MobileCydia.app/{} ../_/Applications/Cydia.app/{} ';'
+	cd MobilePhalena.app && find . -name '*.png' -exec cp -af ../Images/MobilePhalena.app/{} ../_/Applications/Phalena.app/{} ';'
 	
-	mkdir -p _/Applications/Cydia.app/Sources
-	ln -s /usr/share/bigboss/icons/bigboss.png _/Applications/Cydia.app/Sources/apt.bigboss.us.com.png
-	ln -s /usr/share/bigboss/icons/planetiphones.png _/Applications/Cydia.app/Sections/"Planet-iPhones Mods.png"
+	mkdir -p _/Applications/Phalena.app/Sources
+	ln -s /usr/share/bigboss/icons/bigboss.png _/Applications/Phalena.app/Sources/apt.bigboss.us.com.png
+	ln -s /usr/share/bigboss/icons/planetiphones.png _/Applications/Phalena.app/Sections/"Planet-iPhones Mods.png"
 	
 	mkdir -p _/DEBIAN
-	./control.sh cydia.control _ >_/DEBIAN/control
+	./control.sh phalena.control _ >_/DEBIAN/control
 	cp -a preinst postinst _/DEBIAN/
 	
 	find _ -exec touch -t "$$(date -j -f "%s" +"%Y%m%d%H%M.%S" "$$(git show --format='format:%ct' | head -n 1)")" {} ';'
 	
 	sudo chown -R 0 _
 	sudo chgrp -R 0 _
-	sudo chmod 6755 _/usr/libexec/cydia/cydo
+	sudo chmod 6755 _/usr/libexec/phalena/cydo
 	
 	mkdir -p debs
-	ln -sf debs/cydia_$(version)_iphoneos-arm.deb Cydia.deb
-	$(dpkg) -b _ Cydia.deb
-	@echo "$$(stat -L -f "%z" Cydia.deb) $$(stat -f "%Y" Cydia.deb)"
+	ln -sf debs/phalena_$(version)_iphoneos-arm.deb Phalena.deb
+	$(dpkg) -b _ Phalena.deb
+	@echo "$$(stat -L -f "%z" Phalena.deb) $$(stat -f "%Y" Phalena.deb)"
 
-$(lproj_deb): $(shell find MobileCydia.app -name '*.strings') cydia-lproj.control
+$(lproj_deb): $(shell find MobilePhalena.app -name '*.strings') phalena-lproj.control
 	sudo rm -rf __
-	mkdir -p __/Applications/Cydia.app
+	mkdir -p __/Applications/Phalena.app
 	
-	cp -a MobileCydia.app/*.lproj __/Applications/Cydia.app
+	cp -a MobilePhalena.app/*.lproj __/Applications/Phalena.app
 	
 	mkdir -p __/DEBIAN
-	./control.sh cydia-lproj.control __ >__/DEBIAN/control
+	./control.sh phalena-lproj.control __ >__/DEBIAN/control
 	
 	sudo chown -R 0 __
 	sudo chgrp -R 0 __
 	
 	mkdir -p debs
-	ln -sf debs/cydia-lproj_$(version)_iphoneos-arm.deb Cydia_.deb
-	$(dpkg) -b __ Cydia_.deb
-	@echo "$$(stat -L -f "%z" Cydia_.deb) $$(stat -f "%Y" Cydia_.deb)"
+	ln -sf debs/phalena-lproj_$(version)_iphoneos-arm.deb Phalena_.deb
+	$(dpkg) -b __ Phalena_.deb
+	@echo "$$(stat -L -f "%z" Phalena_.deb) $$(stat -f "%Y" Phalena_.deb)"
 	
-package: debs/cydia_$(version)_iphoneos-arm.deb $(lproj_deb)
+package: debs/phalena_$(version)_iphoneos-arm.deb $(lproj_deb)
 
 .PHONY: all clean package

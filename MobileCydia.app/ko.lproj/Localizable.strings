@@ -1,5 +1,5 @@
 "ABOUT" = "정보";
-"ABOUT_CYDIA" = "Cydia Installer 정보";
+"ABOUT_PHALENA" = "Phalena Installer 정보";
 "ACCEPT_NEW_COPY" = "새 사본 수락";
 "ADD" = "추가";
 "ADD_ANYWAY" = "무시하고 추가";
@@ -22,7 +22,7 @@
 "CLEAN_ARCHIVES" = "아카이브 정리";
 "CLEAR" = "지우기";
 "CLOSE" = "닫기";
-"CLOSE_CYDIA" = "Cydia 종료";
+"CLOSE_PHALENA" = "Phalena 종료";
 "COLON_DELIMITED" = "%@: %@";
 "COMMA_DELIMITED" = "%@, %@";
 "COMPLETE" = "작업 완료";
@@ -45,13 +45,13 @@
 "DOWNLOADING_" = "%@ 다운로드 중";
 "EDIT" = "편집";
 "ELISION" = "%@...";
-"ENTER_APT_URL" = "Cydia/APT URL 입력";
+"ENTER_APT_URL" = "Phalena/APT URL 입력";
 "ERROR" = "오류";
 "ESSENTIAL_UPGRADE" = "중요 업그레이드";
 "ESSENTIAL_UPGRADES" = "중요 업그레이드 %d개";
 "ESSENTIAL_UPGRADE_EX" = "하나 이상의 중요 패키지가 현재 최신 버전이 아닙니다. 업그레이드를 설치하지 않으면 오류가 발생할 수 있습니다.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(완료 시 Cydia가 종료됩니다)";
+"EXIT_WHEN_COMPLETE" = "(완료 시 Phalena가 종료됩니다)";
 "EXPERT" = "전문가용";
 "FILES" = "파일";
 "FILESYSTEM_CONTENT" = "파일시스템 내용";
@@ -127,15 +127,15 @@
 "RELOAD_SPRINGBOARD" = "SpringBoard 갱신";
 "REMOVE" = "제거";
 "REMOVING_ESSENTIALS" = "중요 패키지 제거";
-"REMOVING_ESSENTIALS_EX" = "이 작업을 수행하면 Cydia 또는 iOS의 구동에 필요한 하나 이상의 패키지가 제거됩니다. 계속 진행할 경우 Cydia가 발생 가능한 손상을 복구하지 못할 수 있습니다.";
+"REMOVING_ESSENTIALS_EX" = "이 작업을 수행하면 Phalena 또는 iOS의 구동에 필요한 하나 이상의 패키지가 제거됩니다. 계속 진행할 경우 Phalena가 발생 가능한 손상을 복구하지 못할 수 있습니다.";
 "REPAIRING" = "복구 중";
 "REQUEST_ADVERTISING_SPACE" = "광고 공간 요청";
 "REQUIREMENTS_FOR_LISTING" = "등록 요건";
 "RESTART_SPRINGBOARD" = "SpringBoard 다시 시작";
 "RESUBMIT_FORM" = "이 양식을 다시 제출하시겠습니까?";
 "RESUMING_AT" = "재시작 위치";
-"RETURN_TO_CYDIA" = "Cydia로 복귀";
-"ROLE_EX" = "Cydia를 통해 제공되는 패키지 중 일부는 사용자에 제한을 둘 수 있습니다. Cydia가 적합한 필터를 적용할 수 있도록 패키지를 분류해주십시오.\n\niPhone 및 iPod touch의 경우 \"관리\" 탭 아래의 \"설정\"에서 iPad의 경우 \"소스\" 탭에서 선택 사항을 변경할 수 있습니다.";
+"RETURN_TO_PHALENA" = "Phalena로 복귀";
+"ROLE_EX" = "Phalena를 통해 제공되는 패키지 중 일부는 사용자에 제한을 둘 수 있습니다. Phalena가 적합한 필터를 적용할 수 있도록 패키지를 분류해주십시오.\n\niPhone 및 iPod touch의 경우 \"관리\" 탭 아래의 \"설정\"에서 iPad의 경우 \"소스\" 탭에서 선택 사항을 변경할 수 있습니다.";
 "RUNNING" = "작업 중";
 "SAFE" = "안전";
 "SCREENSHOT" = "스크린샷";
@@ -164,7 +164,7 @@
 "TEMPORARY_IGNORE" = "무시 (임시)";
 "THANK_YOU" = "감사합니다";
 "UNABLE_TO_COMPLY" = "실행 불가";
-"UNABLE_TO_COMPLY_EX" = "이 작업을 진행하면 Cydia 또는 iOS의 구동에 필요한 하나 이상의 패키지가 제거됩니다. 작업을 강제로 진행하려면 설정에서 고급 옵션을 활성화하시기 바랍니다.";
+"UNABLE_TO_COMPLY_EX" = "이 작업을 진행하면 Phalena 또는 iOS의 구동에 필요한 하나 이상의 패키지가 제거됩니다. 작업을 강제로 진행하려면 설정에서 고급 옵션을 활성화하시기 바랍니다.";
 "UNABLE_TO_LOAD" = "불러오기 실패";
 "UNKNOWN" = "알 수 없음";
 "UNSAFE" = "위험";
@@ -180,6 +180,6 @@
 "VERIFYING_URL" = "URL 인증 중";
 "VERSION" = "버전";
 "WARNING" = "경고";
-"WELCOME_TO_CYDIA" = "Cydia™에 환영합니다";
+"WELCOME_TO_PHALENA" = "Phalena™에 환영합니다";
 "WHO_ARE_YOU" = "사용자 구분 선택";
 "YES" = "예";

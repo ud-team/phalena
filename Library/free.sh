@@ -9,7 +9,7 @@ for dir in \
     /usr/include \
     /usr/share \
 ; do
-    . /usr/libexec/cydia/move.sh "$@" "${dir}"
+    . /usr/libexec/phalena/move.sh "$@" "${dir}"
 done
 
 sync

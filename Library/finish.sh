@@ -1,8 +1,8 @@
 #!/bin/bash
 
-declare -a cydia
-cydia=($CYDIA)
+declare -a phalena
+phalena=($PHALENA)
 
-if [[ ${CYDIA+@} ]]; then
-    eval "echo 'finish:$1' >&${cydia[0]}"
+if [[ ${PHALENA+@} ]]; then
+    eval "echo 'finish:$1' >&${phalena[0]}"
 fi

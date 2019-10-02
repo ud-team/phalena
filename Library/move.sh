@@ -22,10 +22,10 @@ function mv_() {
 
     if [[ ! -e /var/stash ]]; then
         mkdir -p /var/db/stash
-        /usr/libexec/cydia/setnsfpn /var/db/stash
+        /usr/libexec/phalena/setnsfpn /var/db/stash
         ln -s -t /var /var/db/stash
     elif [[ -d /var/stash ]]; then
-        /usr/libexec/cydia/setnsfpn /var/stash
+        /usr/libexec/phalena/setnsfpn /var/stash
     fi
 
     tmp=$(mktemp -d /var/stash/_.XXXXXX)
@@ -64,7 +64,7 @@ function shift_() {
     dir=${1%/}
 
     if [[ -d ${dir} && ! -h ${dir} ]]; then
-        used=$(/usr/libexec/cydia/du -bs "${dir}")
+        used=$(/usr/libexec/phalena/du -bs "${dir}")
         used=${used%%$'\t'*}
         free=$(df_ /var)
 

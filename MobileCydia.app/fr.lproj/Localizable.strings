@@ -1,5 +1,5 @@
 "ABOUT" = "À propos";
-"ABOUT_CYDIA" = "À propos de l'installateur Cydia";
+"ABOUT_PHALENA" = "À propos de l'installateur Phalena";
 "ACCEPT_NEW_COPY" = "Accepter la nouvelle version";
 "ADD" = "Ajouter";
 "ADD_ANYWAY" = "Ajouter quand même";
@@ -25,7 +25,7 @@
 "CLEAN_ARCHIVES" = "Nettoyer les archives";
 "CLEAR" = "Effacer";
 "CLOSE" = "Fermer";
-"CLOSE_CYDIA" = "Quitter Cydia";
+"CLOSE_PHALENA" = "Quitter Phalena";
 "COLON_DELIMITED" = "%@: %@";
 "COMING_SOON" = "À venir!";
 "COMMA_DELIMITED" = "%@, %@";
@@ -40,7 +40,7 @@
 "CONTINUE_QUEUING" = "Laisser en file d'attente";
 "COUNTS_NONZERO_EX" = "Après avoir calculé la somme de valeurs importantes, elle n'est pas égale à zéro. Ceci est épeurant. J'ai aucune idée pourquoi ceci est dangereux, mais je crois que APT ne voulait absolument pas que ceci arrive.";
 "CREDITS" = "Crédits";
-"CYDIA_STORE" = "Cydia Store";
+"PHALENA_STORE" = "Phalena Store";
 "DATABASE" = "Base de données";
 "DETAILS" = "Détails";
 "DEVELOPER" = "Développeur";
@@ -57,13 +57,13 @@
 "EDIT" = "Modifier";
 "ELISION" = "%@...";
 "ENTERED_BY_USER" = "Entré par l'utilisateur";
-"ENTER_APT_URL" = "Entrez une adresse Cydia/APT";
+"ENTER_APT_URL" = "Entrez une adresse Phalena/APT";
 "ERROR" = "Erreur";
 "ESSENTIAL_UPGRADE" = "Mise à niveau essentielle";
 "ESSENTIAL_UPGRADES" = "%d mises à niveau essentielles";
 "ESSENTIAL_UPGRADE_EX" = "Un ou plusieurs paquets essentiels sont périmés. Ne pas les mettre à jour peut entraîner des erreurs.";
 "EXCLAMATION" = "%@ !";
-"EXIT_WHEN_COMPLETE" = "(la fermeture de Cydia interviendra à l'issue)";
+"EXIT_WHEN_COMPLETE" = "(la fermeture de Phalena interviendra à l'issue)";
 "EXPANDED_SIZE" = "Taille décompressée";
 "EXPERT" = "Expert";
 "FAQ" = "FAQ";
@@ -121,7 +121,7 @@
 "NOTE" = "Note";
 "NOT_RATED" = "Pas de cote";
 "NOT_REPOSITORY" = "Source introuvable";
-"NOT_REPOSITORY_EX" = "La source indiquée est introuvable, peut-être parce que vous essayez d'ajouter une source Installer (installateur) que Cydia ne prend pas en charge. Cydia ne fonctionne qu'avec des adresses exactes.";
+"NOT_REPOSITORY_EX" = "La source indiquée est introuvable, peut-être parce que vous essayez d'ajouter une source Installer (installateur) que Phalena ne prend pas en charge. Phalena ne fonctionne qu'avec des adresses exactes.";
 "NO_SECTION" = "(Pas de catégorie)";
 "OK" = "OK";
 "OKAY" = "OK";
@@ -155,7 +155,7 @@
 "RELOAD_SPRINGBOARD" = "Recharger SpringBoard";
 "REMOVE" = "Supprimer";
 "REMOVING_ESSENTIALS" = "Suppression d'essentiels";
-"REMOVING_ESSENTIALS_EX" = "Cette opération va supprimer un ou plusieurs paquets indispensables au bon fonctionnement de Cydia ou de votre iPhone. Si vous continuez, Cydia risque d'être inutilisable et de ne pas pouvoir réparer les dommages causés.";
+"REMOVING_ESSENTIALS_EX" = "Cette opération va supprimer un ou plusieurs paquets indispensables au bon fonctionnement de Phalena ou de votre iPhone. Si vous continuez, Phalena risque d'être inutilisable et de ne pas pouvoir réparer les dommages causés.";
 "REPAIRING" = "Réparation";
 "REPOSITORY_SIGNATURE" = "Voir la Signature de la Source";
 "REQUEST_ADVERTISING_SPACE" = "Demander un espace publicitaire";
@@ -163,8 +163,8 @@
 "RESTART_SPRINGBOARD" = "Relancer le SpringBoard";
 "RESUBMIT_FORM" = "Voulez-vous vraiment soumettre à nouveau ce formulaire ? ";
 "RESUMING_AT" = "Reprise à";
-"RETURN_TO_CYDIA" = "Retour vers Cydia";
-"ROLE_EX" = "Les paquets disponibles sur Cydia ne sont pas tous destinés à l'ensemble des utilisateurs. Choisissez les catégories dont vous êtes susceptible d'avoir besoin dans Cydia.\n\nCe choix est modifiable dans \"Gestion\" > \"Réglages\".";
+"RETURN_TO_PHALENA" = "Retour vers Phalena";
+"ROLE_EX" = "Les paquets disponibles sur Phalena ne sont pas tous destinés à l'ensemble des utilisateurs. Choisissez les catégories dont vous êtes susceptible d'avoir besoin dans Phalena.\n\nCe choix est modifiable dans \"Gestion\" > \"Réglages\".";
 "RUNNING" = "Fonctionne";
 "SAFE" = "Sûr";
 "SAMPLE" = "Échantillon";
@@ -198,7 +198,7 @@
 "TEMPORARY_IGNORE" = "Ignorer (temporairement)";
 "THANK_YOU" = "Remerciements";
 "UNABLE_TO_COMPLY" = "Impossible";
-"UNABLE_TO_COMPLY_EX" = "Cette opération va supprimer un ou plusieurs paquets indispensables au bon fonctionnement de Cydia ou de votre iPhone. Pour continuer et forcer cette opération, vous devez activer le mode Utilisateur avancé dans Réglages.";
+"UNABLE_TO_COMPLY_EX" = "Cette opération va supprimer un ou plusieurs paquets indispensables au bon fonctionnement de Phalena ou de votre iPhone. Pour continuer et forcer cette opération, vous devez activer le mode Utilisateur avancé dans Réglages.";
 "UNABLE_TO_LOAD" = "Chargement impossible";
 "UNKNOWN" = "Inconnu";
 "UNSAFE" = "Risqué";
@@ -215,6 +215,6 @@
 "VERIFYING_URL" = "Vérification de l'URL";
 "VERSION" = "Version";
 "WARNING" = "Avertissement";
-"WELCOME_TO_CYDIA" = "Bienvenue dans Cydia™";
+"WELCOME_TO_PHALENA" = "Bienvenue dans Phalena™";
 "WHO_ARE_YOU" = "Qui êtes-vous?";
 "YES" = "Oui";

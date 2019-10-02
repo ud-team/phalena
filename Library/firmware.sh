@@ -13,9 +13,9 @@ if [[ ${cpu} == arm || ${cpu} == arm64 ]]; then
     model=hw.machine
     arch=iphoneos-arm
 else
-    data=/Library/Cydia/dpkg
+    data=/Library/Phalena/dpkg
     model=hw.model
-    arch=cydia
+    arch=phalena
 fi
 
 model=$(sysctl -n "${model}")
@@ -42,7 +42,7 @@ Architecture: ${arch}
 Version: ${version}
 Description: ${description}
 Maintainer: Jay Freeman (saurik) <saurik@saurik.com>
-Tag: role::cydia
+Tag: role::phalena
 EOF
 
     [[ -n ${name} ]] && echo "Name: ${name}"
@@ -139,7 +139,7 @@ rm -f "${data}"/status-tmp.!("${xxxxxx}")
 
     pseudo "cy+kernel.$(lower <<<$(sysctl -n kern.ostype))" "$(sysctl -n kern.osrelease)" "virtual kernel dependency"
 
-    pseudo "cy+lib.corefoundation" "$(/usr/libexec/cydia/cfversion)" "virtual corefoundation dependency"
+    pseudo "cy+lib.corefoundation" "$(/usr/libexec/phalena/cfversion)" "virtual corefoundation dependency"
 
 } >"${output}"
 
@@ -150,5 +150,5 @@ if [[ ${cpu} == arm || ${cpu} == arm64 ]]; then
         cp -afT /User /var/mobile
     fi && rm -rf /User && ln -s "/var/mobile" /User
 
-    echo 6 >/var/lib/cydia/firmware.ver
+    echo 6 >/var/lib/phalena/firmware.ver
 fi

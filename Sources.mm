@@ -1,21 +1,21 @@
-/* Cydia - iPhone UIKit Front-End for Debian APT
+/* Phalena - iPhone UIKit Front-End for Debian APT
  * Copyright (C) 2008-2013  Jay Freeman (saurik)
 */
 
 /* GNU General Public License, Version 3 {{{ */
 /*
- * Cydia is free software: you can redistribute it and/or modify
+ * Phalena is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation, either version 3 of the License,
  * or (at your option) any later version.
  *
- * Cydia is distributed in the hope that it will be useful, but
+ * Phalena is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Cydia.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Phalena.  If not, see <http://www.gnu.org/licenses/>.
 **/
 /* }}} */
 
@@ -36,7 +36,7 @@ NSString *Cache(const char *file) {
 
 extern _H<NSMutableDictionary> Sources_;
 
-void CydiaWriteSources() {
+void PhalenaWriteSources() {
     auto sources([SOURCES_LIST UTF8String]);
     unlink(sources);
     FILE *file(fopen(sources, "w"));
@@ -64,15 +64,15 @@ void CydiaWriteSources() {
     fclose(file);
 }
 
-void CydiaAddSource(NSDictionary *source) {
+void PhalenaAddSource(NSDictionary *source) {
     [Sources_ setObject:source forKey:[NSString stringWithFormat:@"%@:%@:%@", [source objectForKey:@"Type"], [source objectForKey:@"URI"], [source objectForKey:@"Distribution"]]];
 }
 
-void CydiaAddSource(NSString *href, NSString *distribution, NSArray *sections) {
+void PhalenaAddSource(NSString *href, NSString *distribution, NSArray *sections) {
     if (href == nil || distribution == nil)
         return;
 
-    CydiaAddSource([NSMutableDictionary dictionaryWithObjectsAndKeys:
+    PhalenaAddSource([NSMutableDictionary dictionaryWithObjectsAndKeys:
         @"deb", @"Type",
         href, @"URI",
         distribution, @"Distribution",

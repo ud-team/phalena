@@ -1,5 +1,5 @@
-#ifndef CYDIA_UIKITPRIVATE_H
-#define CYDIA_UIKITPRIVATE_H
+#ifndef PHALENA_UIKITPRIVATE_H
+#define PHALENA_UIKITPRIVATE_H
 
 // #include <*> {{{
 #include <JavaScriptCore/JavaScriptCore.h>
@@ -620,4 +620,4 @@ extern "C" UIImage *_UIImageWithName(NSString *name);
 extern "C" void UISetColor(CGColorRef color);
 // }}}
 
-#endif//CYDIA_UIKITPRIVATE_H
+#endif//PHALENA_UIKITPRIVATE_H

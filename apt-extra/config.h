@@ -27,7 +27,7 @@
 #undef HAVE_PTSNAME_R
 
 #define COMMON_ARCH "iphoneos-arm"
-#define PACKAGE "cydia" // XXX
+#define PACKAGE "phalena" // XXX
 #define PACKAGE_VERSION "${PACKAGE_VERSION}" // XXX
 #define PACKAGE_MAIL "saurik@saurik.com"
 

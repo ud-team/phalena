@@ -1,5 +1,5 @@
 "ABOUT" = "情報";
-"ABOUT_CYDIA" = "Cydia インストーラについて";
+"ABOUT_PHALENA" = "Phalena インストーラについて";
 "ACCEPT_NEW_COPY" = "新しいコピーを入手する";
 "ADD" = "追加";
 "ADD_ANYWAY" = "続行";
@@ -22,7 +22,7 @@
 "CLEAN_ARCHIVES" = "アーカイブのクリア";
 "CLEAR" = "クリア";
 "CLOSE" = "閉じる";
-"CLOSE_CYDIA" = "Cydia を終了";
+"CLOSE_PHALENA" = "Phalena を終了";
 "COLON_DELIMITED" = "%@: %@";
 "COMMA_DELIMITED" = "%@, %@";
 "COMPLETE" = "タスク完了";
@@ -45,13 +45,13 @@
 "DOWNLOADING_" = "%@をダウンロード中 ";
 "EDIT" = "編集";
 "ELISION" = "%@...";
-"ENTER_APT_URL" = "Cydia/APTのURLを入力";
+"ENTER_APT_URL" = "Phalena/APTのURLを入力";
 "ERROR" = "エラー";
 "ESSENTIAL_UPGRADE" = "必須アップグレードのみ";
 "ESSENTIAL_UPGRADES" = "%d件の必須アップグレード";
 "ESSENTIAL_UPGRADE_EX" = "1件または複数の必須パッケージが期限切れです。アップグレードを行わない場合は、エラーが発生する可能性があります。";
 "EXCLAMATION" = "%@！";
-"EXIT_WHEN_COMPLETE" = "（完了後、Cydia は終了します。）";
+"EXIT_WHEN_COMPLETE" = "（完了後、Phalena は終了します。）";
 "EXPERT" = "上級者向け";
 "FILES" = "ファイル";
 "FILESYSTEM_CONTENT" = "インストール済みのファイル";
@@ -134,7 +134,7 @@
 "RESTART_SPRINGBOARD" = "SpringBoardを再起動";
 "RESUBMIT_FORM" = "このフォームを再送信しますか？";
 "RESUMING_AT" = "再開時の容量";
-"RETURN_TO_CYDIA" = "Cydia に戻る";
+"RETURN_TO_PHALENA" = "Phalena に戻る";
 "ROLE_EX" = "本アプリにはすべてのユーザー向けでないパッケージも用意されています。お客様に合ったカテゴリーを選んで頂くことで、適切なフィルターを適用することができます。\n<tethras_protector value=\"\\n\"  />これは、\"管理\"タブ（iPhone/iPod touchの場合）もしくは\"ソース\"タブ（iPadの場合）内の\"設定\"からいつでも変更できます。";
 "RUNNING" = "実行中";
 "SAFE" = "安全";
@@ -180,6 +180,6 @@
 "VERIFYING_URL" = "URLを確認中";
 "VERSION" = "バージョン";
 "WARNING" = "警告";
-"WELCOME_TO_CYDIA" = "Welcome to Cydia™";
+"WELCOME_TO_PHALENA" = "Welcome to Phalena™";
 "WHO_ARE_YOU" = "ユーザー情報";
 "YES" = "はい";

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var index in nodes) {
         var node = nodes[index];
         var key = node.getAttribute('localize');
-        var value = cydia.localize(key, node.innerHTML);
+        var value = phalena.localize(key, node.innerHTML);
         if (node.nodeName == 'TITLE')
             document.title = value;
         else
