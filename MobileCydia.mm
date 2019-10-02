@@ -1,21 +1,21 @@
-/* Cydia - iPhone UIKit Front-End for Debian APT
+/* Phalena - iPhone UIKit Front-End for Debian APT
  * Copyright (C) 2008-2015  Jay Freeman (saurik)
 */
 
 /* GNU General Public License, Version 3 {{{ */
 /*
- * Cydia is free software: you can redistribute it and/or modify
+ * Phalena is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation, either version 3 of the License,
  * or (at your option) any later version.
  *
- * Cydia is distributed in the hope that it will be useful, but
+ * Phalena is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Cydia.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Phalena.  If not, see <http://www.gnu.org/licenses/>.
 **/
 /* }}} */
 
@@ -113,9 +113,9 @@ extern "C" {
 #include "CyteKit/CyteKit.h"
 #include "CyteKit/RegEx.hpp"
 
-#include "Cydia/MIMEAddress.h"
-#include "Cydia/LoadingViewController.h"
-#include "Cydia/ProgressEvent.h"
+#include "Phalena/MIMEAddress.h"
+#include "Phalena/LoadingViewController.h"
+#include "Phalena/ProgressEvent.h"
 /* }}} */
 
 /* Profiler {{{ */
@@ -188,7 +188,7 @@ void PrintTimes() {
 #define _end }
 /* }}} */
 
-extern NSString *Cydia_;
+extern NSString *Phalena_;
 
 #define lprintf(args...) fprintf(stderr, args)
 
@@ -244,7 +244,7 @@ static NSString *UniqueIdentifier(UIDevice *device = nil) {
 
 static const NSUInteger UIViewAutoresizingFlexibleBoth(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 
-static _finline NSString *CydiaURL(NSString *path) {
+static _finline NSString *PhalenaURL(NSString *path) {
     char page[26];
     page[0] = 'h'; page[1] = 't'; page[2] = 't'; page[3] = 'p'; page[4] = 's';
     page[5] = ':'; page[6] = '/'; page[7] = '/'; page[8] = 'c'; page[9] = 'y';
@@ -261,11 +261,11 @@ static NSString *ShellEscape(NSString *value) {
 
 static _finline void UpdateExternalStatus(uint64_t newStatus) {
     int notify_token;
-    if (notify_register_check("com.saurik.Cydia.status", &notify_token) == NOTIFY_STATUS_OK) {
+    if (notify_register_check("com.saurik.Phalena.status", &notify_token) == NOTIFY_STATUS_OK) {
         notify_set_state(notify_token, newStatus);
         notify_cancel(notify_token);
     }
-    notify_post("com.saurik.Cydia.status");
+    notify_post("com.saurik.Phalena.status");
 }
 
 /* NSForcedOrderingSearch doesn't work on the iPhone */
@@ -340,13 +340,13 @@ void CYArrayInsertionSortValues(Type_ *values, size_t length, CFComparisonResult
 
 /* }}} */
 
-/* Cydia NSString Additions {{{ */
-@interface NSString (Cydia)
+/* Phalena NSString Additions {{{ */
+@interface NSString (Phalena)
 - (NSComparisonResult) compareByPath:(NSString *)other;
 - (NSString *) stringByAddingPercentEscapesIncludingReserved;
 @end
 
-@implementation NSString (Cydia)
+@implementation NSString (Phalena)
 
 - (NSComparisonResult) compareByPath:(NSString *)other {
     NSString *prefix = [self commonPrefixWithString:other options:0];
@@ -691,10 +691,10 @@ static _H<NSMutableDictionary> SessionData_;
 static _H<NSMutableSet> BridgedHosts_;
 static _H<NSMutableSet> InsecureHosts_;
 
-static NSString *kCydiaProgressEventTypeError = @"Error";
-static NSString *kCydiaProgressEventTypeInformation = @"Information";
-static NSString *kCydiaProgressEventTypeStatus = @"Status";
-static NSString *kCydiaProgressEventTypeWarning = @"Warning";
+static NSString *kPhalenaProgressEventTypeError = @"Error";
+static NSString *kPhalenaProgressEventTypeInformation = @"Information";
+static NSString *kPhalenaProgressEventTypeStatus = @"Status";
+static NSString *kPhalenaProgressEventTypeWarning = @"Warning";
 /* }}} */
 
 /* Display Helpers {{{ */
@@ -763,17 +763,17 @@ static NSString *VerifySource(NSString *href) {
     return href;
 }
 
-@class Cydia;
+@class Phalena;
 
 /* Delegate Prototypes {{{ */
 @class Package;
 @class Source;
-@class CydiaProgressEvent;
+@class PhalenaProgressEvent;
 
 @protocol DatabaseDelegate
 - (void) repairWithSelector:(SEL)selector;
 - (void) setConfigurationData:(NSString *)data;
-- (void) addProgressEventOnMainThread:(CydiaProgressEvent *)event forTask:(NSString *)task;
+- (void) addProgressEventOnMainThread:(PhalenaProgressEvent *)event forTask:(NSString *)task;
 @end
 
 @class CYPackageController;
@@ -788,8 +788,8 @@ static NSString *VerifySource(NSString *href) {
 - (void) stopSourceFetch:(NSString *)uri;
 @end
 
-@protocol CydiaDelegate
-- (void) returnToCydia;
+@protocol PhalenaDelegate
+- (void) returnToPhalena;
 - (void) saveState;
 - (void) retainNetworkActivityIndicator;
 - (void) releaseNetworkActivityIndicator;
@@ -852,14 +852,14 @@ class CancelStatus :
 };
 /* }}} */
 /* DelegateStatus {{{ */
-class CydiaStatus :
+class PhalenaStatus :
     public CancelStatus
 {
   private:
     _transient NSObject<ProgressDelegate> *delegate_;
 
   public:
-    CydiaStatus() :
+    PhalenaStatus() :
         delegate_(nil)
     {
     }
@@ -870,13 +870,13 @@ class CydiaStatus :
 
     virtual void Fetch(pkgAcquire::ItemDesc &desc) {
         NSString *name([NSString stringWithUTF8String:desc.ShortDesc.c_str()]);
-        CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithFormat:UCLocalize("DOWNLOADING_"), name] ofType:kCydiaProgressEventTypeStatus forItemDesc:desc]);
+        PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:[NSString stringWithFormat:UCLocalize("DOWNLOADING_"), name] ofType:kPhalenaProgressEventTypeStatus forItemDesc:desc]);
         [delegate_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
     }
 
     virtual void Done(pkgAcquire::ItemDesc &desc) {
         NSString *name([NSString stringWithUTF8String:desc.ShortDesc.c_str()]);
-        CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithFormat:Colon_, UCLocalize("DONE"), name] ofType:kCydiaProgressEventTypeStatus forItemDesc:desc]);
+        PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:[NSString stringWithFormat:Colon_, UCLocalize("DONE"), name] ofType:kPhalenaProgressEventTypeStatus forItemDesc:desc]);
         [delegate_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
     }
 
@@ -891,7 +891,7 @@ class CydiaStatus :
         if (error.empty())
             return;
 
-        CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:kCydiaProgressEventTypeError forItemDesc:desc]);
+        PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:kPhalenaProgressEventTypeError forItemDesc:desc]);
         [delegate_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
     }
 
@@ -951,9 +951,9 @@ typedef std::map< unsigned long, _H<Source> > SourceMap;
     _transient NSObject<DatabaseDelegate> *delegate_;
     _transient NSObject<ProgressDelegate> *progress_;
 
-    CydiaStatus status_;
+    PhalenaStatus status_;
 
-    int cydiafd_;
+    int phalenafd_;
     int statusfd_;
     FILE *input_;
 
@@ -964,7 +964,7 @@ typedef std::map< unsigned long, _H<Source> > SourceMap;
 - (unsigned) era;
 - (bool) hasPackages;
 
-- (void) _readCydia:(NSNumber *)fd;
+- (void) _readPhalena:(NSNumber *)fd;
 - (void) _readStatus:(NSNumber *)fd;
 - (void) _readOutput:(NSNumber *)fd;
 
@@ -1101,20 +1101,20 @@ class SourceStatus :
 };
 /* }}} */
 /* ProgressEvent Implementation {{{ */
-@implementation CydiaProgressEvent
+@implementation PhalenaProgressEvent
 
-+ (CydiaProgressEvent *) eventWithMessage:(NSString *)message ofType:(NSString *)type {
-    return [[[CydiaProgressEvent alloc] initWithMessage:message ofType:type] autorelease];
++ (PhalenaProgressEvent *) eventWithMessage:(NSString *)message ofType:(NSString *)type {
+    return [[[PhalenaProgressEvent alloc] initWithMessage:message ofType:type] autorelease];
 }
 
-+ (CydiaProgressEvent *) eventWithMessage:(NSString *)message ofType:(NSString *)type forPackage:(NSString *)package {
-    CydiaProgressEvent *event([self eventWithMessage:message ofType:type]);
++ (PhalenaProgressEvent *) eventWithMessage:(NSString *)message ofType:(NSString *)type forPackage:(NSString *)package {
+    PhalenaProgressEvent *event([self eventWithMessage:message ofType:type]);
     [event setPackage:package];
     return event;
 }
 
-+ (CydiaProgressEvent *) eventWithMessage:(NSString *)message ofType:(NSString *)type forItemDesc:(pkgAcquire::ItemDesc &)desc {
-    CydiaProgressEvent *event([self eventWithMessage:message ofType:type]);
++ (PhalenaProgressEvent *) eventWithMessage:(NSString *)message ofType:(NSString *)type forItemDesc:(pkgAcquire::ItemDesc &)desc {
+    PhalenaProgressEvent *event([self eventWithMessage:message ofType:type]);
 
     NSString *description([NSString stringWithUTF8String:desc.Description.c_str()]);
     NSArray *fields([description componentsSeparatedByString:@" "]);
@@ -1200,9 +1200,9 @@ class SourceStatus :
     if (value != nil) {
         NSString *mode(nil); {
             NSString *type([self type]);
-            if ([type isEqualToString:kCydiaProgressEventTypeError])
+            if ([type isEqualToString:kPhalenaProgressEventTypeError])
                 mode = UCLocalize("ERROR");
-            else if ([type isEqualToString:kCydiaProgressEventTypeWarning])
+            else if ([type isEqualToString:kPhalenaProgressEventTypeWarning])
                 mode = UCLocalize("WARNING");
         }
 
@@ -1353,16 +1353,16 @@ static void SaveConfig(NSObject *lock) {
     }
 
     CFPreferencesSetMultiple((CFDictionaryRef) [NSDictionary dictionaryWithObjectsAndKeys:
-        Values_, @"CydiaValues",
-        Sections_, @"CydiaSections",
-        (id) Sources_, @"CydiaSources",
-        Version_, @"CydiaVersion",
-    nil], NULL, CFSTR("com.saurik.Cydia"), kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+        Values_, @"PhalenaValues",
+        Sections_, @"PhalenaSections",
+        (id) Sources_, @"PhalenaSources",
+        Version_, @"PhalenaVersion",
+    nil], NULL, CFSTR("com.saurik.Phalena"), kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
 
-    if (!CFPreferencesAppSynchronize(CFSTR("com.saurik.Cydia")))
-        NSLog(@"CFPreferencesAppSynchronize(com.saurik.Cydia) == false");
+    if (!CFPreferencesAppSynchronize(CFSTR("com.saurik.Phalena")))
+        NSLog(@"CFPreferencesAppSynchronize(com.saurik.Phalena) == false");
 
-    CydiaWriteSources();
+    PhalenaWriteSources();
 }
 
 /* Source Class {{{ */
@@ -1691,7 +1691,7 @@ static void SaveConfig(NSObject *lock) {
 
 - (NSString *) iconuri {
     if (NSString *base = [self baseuri])
-        return [base stringByAppendingString:@"CydiaIcon.png"];
+        return [base stringByAppendingString:@"PhalenaIcon.png"];
 
     return nil;
 }
@@ -1761,8 +1761,8 @@ static void SaveConfig(NSObject *lock) {
 
 @end
 /* }}} */
-/* CydiaOperation Class {{{ */
-@interface CydiaOperation : NSObject {
+/* PhalenaOperation Class {{{ */
+@interface PhalenaOperation : NSObject {
     _H<NSString> operator_;
     _H<NSString> value_;
 }
@@ -1772,7 +1772,7 @@ static void SaveConfig(NSObject *lock) {
 
 @end
 
-@implementation CydiaOperation
+@implementation PhalenaOperation
 
 - (id) initWithOperator:(const char *)_operator value:(const char *)value {
     if ((self = [super init]) != nil) {
@@ -1806,25 +1806,25 @@ static void SaveConfig(NSObject *lock) {
 
 @end
 /* }}} */
-/* CydiaClause Class {{{ */
-@interface CydiaClause : NSObject {
+/* PhalenaClause Class {{{ */
+@interface PhalenaClause : NSObject {
     _H<NSString> package_;
-    _H<CydiaOperation> version_;
+    _H<PhalenaOperation> version_;
 }
 
 - (NSString *) package;
-- (CydiaOperation *) version;
+- (PhalenaOperation *) version;
 
 @end
 
-@implementation CydiaClause
+@implementation PhalenaClause
 
 - (id) initWithIterator:(pkgCache::DepIterator &)dep {
     if ((self = [super init]) != nil) {
         package_ = [NSString stringWithUTF8String:dep.TargetPkg().Name()];
 
         if (const char *version = dep.TargetVer())
-            version_ = [[[CydiaOperation alloc] initWithOperator:dep.CompType() value:version] autorelease];
+            version_ = [[[PhalenaOperation alloc] initWithOperator:dep.CompType() value:version] autorelease];
         else
             version_ = (id) [NSNull null];
     } return self;
@@ -1849,14 +1849,14 @@ static void SaveConfig(NSObject *lock) {
     return package_;
 }
 
-- (CydiaOperation *) version {
+- (PhalenaOperation *) version {
     return version_;
 }
 
 @end
 /* }}} */
-/* CydiaRelation Class {{{ */
-@interface CydiaRelation : NSObject {
+/* PhalenaRelation Class {{{ */
+@interface PhalenaRelation : NSObject {
     _H<NSString> relationship_;
     _H<NSMutableArray> clauses_;
 }
@@ -1866,7 +1866,7 @@ static void SaveConfig(NSObject *lock) {
 
 @end
 
-@implementation CydiaRelation
+@implementation PhalenaRelation
 
 - (id) initWithIterator:(pkgCache::DepIterator &)dep {
     if ((self = [super init]) != nil) {
@@ -1878,7 +1878,7 @@ static void SaveConfig(NSObject *lock) {
         dep.GlobOr(start, end); // ++dep
 
         _forever {
-            [clauses_ addObject:[[[CydiaClause alloc] initWithIterator:start] autorelease]];
+            [clauses_ addObject:[[[PhalenaClause alloc] initWithIterator:start] autorelease]];
 
             // yes, seriously. (wtf?)
             if (start == end)
@@ -1911,7 +1911,7 @@ static void SaveConfig(NSObject *lock) {
     return clauses_;
 }
 
-- (void) addClause:(CydiaClause *)clause {
+- (void) addClause:(PhalenaClause *)clause {
     [clauses_ addObject:clause];
 }
 
@@ -2263,7 +2263,7 @@ struct PackageNameOrdering :
 @synchronized (database_) {
     NSMutableArray *relations([NSMutableArray arrayWithCapacity:16]);
     for (pkgCache::DepIterator dep(version_.DependsList()); !dep.end(); ++dep)
-        [relations addObject:[[[CydiaRelation alloc] initWithIterator:dep] autorelease]];
+        [relations addObject:[[[PhalenaRelation alloc] initWithIterator:dep] autorelease]];
     return relations;
 } }
 
@@ -2473,13 +2473,13 @@ struct PackageNameOrdering :
                             role_ = 2;
                         else if (strcmp(name + 6, "developer") == 0)
                             role_ = 3;
-                        else if (strcmp(name + 6, "cydia") == 0)
+                        else if (strcmp(name + 6, "phalena") == 0)
                             role_ = 7;
                         else
                             role_ = 4;
                     }
 
-                    if (strncmp(name, "cydia::", 7) == 0) {
+                    if (strncmp(name, "phalena::", 7) == 0) {
                         if (strcmp(name + 7, "essential") == 0)
                             essential_ = true;
                         else if (strcmp(name + 7, "obsolete") == 0)
@@ -2569,7 +2569,7 @@ struct PackageNameOrdering :
     return package;
 }
 
-// XXX: just in case a Cydia extension is using this (I bet this is unlikely, though, due to CYPool?)
+// XXX: just in case a Phalena extension is using this (I bet this is unlikely, though, due to CYPool?)
 + (Package *) packageWithIterator:(pkgCache::PkgIterator)iterator withZone:(NSZone *)zone inPool:(CYPool *)pool database:(Database *)database {
     return [[self newPackageWithIterator:iterator withZone:zone inPool:pool database:database] autorelease];
 }
@@ -2978,8 +2978,8 @@ struct PackageNameOrdering :
             (i == 0 || name[i] != '+' && name[i] != '-' && name[i] != '.')
         ) goto invalid;
 
-    if (strcmp(name, "cydia") != 0) {
-        bool cydia = false;
+    if (strcmp(name, "phalena") != 0) {
+        bool phalena = false;
         bool user = false;
         bool _private = false;
         bool stash = false;
@@ -2990,8 +2990,8 @@ struct PackageNameOrdering :
 
         if (NSArray *files = [self files])
             for (NSString *file in files)
-                if (!cydia && [file isEqualToString:@"/Applications/Cydia.app"])
-                    cydia = true;
+                if (!phalena && [file isEqualToString:@"/Applications/Phalena.app"])
+                    phalena = true;
                 else if (!user && [file isEqualToString:@"/User"])
                     user = true;
                 else if (!_private && [file isEqualToString:@"/private"])
@@ -3004,8 +3004,8 @@ struct PackageNameOrdering :
                     dsstore = true;
 
         /* XXX: this is not sensitive enough. only some folders are valid. */
-        if (cydia && !repository)
-            [warnings addObject:[NSString stringWithFormat:UCLocalize("FILES_INSTALLED_TO"), @"Cydia.app"]];
+        if (phalena && !repository)
+            [warnings addObject:[NSString stringWithFormat:UCLocalize("FILES_INSTALLED_TO"), @"Phalena.app"]];
         if (user)
             [warnings addObject:[NSString stringWithFormat:UCLocalize("FILES_INSTALLED_TO"), @"/User"]];
         if (_private)
@@ -3154,7 +3154,7 @@ struct PackageNameOrdering :
 }
 
 - (bool) isCommercial {
-    return [self hasTag:@"cydia::commercial"];
+    return [self hasTag:@"phalena::commercial"];
 }
 
 - (void) setIndex:(size_t)index {
@@ -3326,7 +3326,7 @@ struct PackageNameOrdering :
 @end
 /* }}} */
 
-class CydiaLogCleaner :
+class PhalenaLogCleaner :
     public pkgArchiveCleaner
 {
   protected:
@@ -3365,7 +3365,7 @@ class CydiaLogCleaner :
     [super dealloc];
 }
 
-- (void) _readCydia:(NSNumber *)fd {
+- (void) _readPhalena:(NSNumber *)fd {
     boost::fdistream is([fd intValue]);
     std::string line;
 
@@ -3410,11 +3410,11 @@ class CydiaLogCleaner :
             [delegate_ performSelectorOnMainThread:@selector(setConfigurationData:) withObject:conffile_r[1] waitUntilDone:YES];
         } else if (strncmp(data, "status: ", 8) == 0) {
             // status: <package>: {unpacked,half-configured,installed}
-            CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(data + 8)] ofType:kCydiaProgressEventTypeStatus]);
+            PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(data + 8)] ofType:kPhalenaProgressEventTypeStatus]);
             [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
         } else if (strncmp(data, "processing: ", 12) == 0) {
             // processing: configure: config-test
-            CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(data + 12)] ofType:kCydiaProgressEventTypeStatus]);
+            PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:[NSString stringWithUTF8String:(data + 12)] ofType:kPhalenaProgressEventTypeStatus]);
             [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
         } else if (pmstatus_r(data, size)) {
             std::string type([pmstatus_r[1] UTF8String]);
@@ -3429,10 +3429,10 @@ class CydiaLogCleaner :
             NSString *string = pmstatus_r[4];
 
             if (type == "pmerror") {
-                CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeError forPackage:package]);
+                PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:string ofType:kPhalenaProgressEventTypeError forPackage:package]);
                 [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
             } else if (type == "pmstatus") {
-                CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:string ofType:kCydiaProgressEventTypeStatus forPackage:package]);
+                PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:string ofType:kPhalenaProgressEventTypeStatus forPackage:package]);
                 [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
             } else if (type == "pmconffile")
                 [delegate_ performSelectorOnMainThread:@selector(setConfigurationData:) withObject:string waitUntilDone:YES];
@@ -3456,7 +3456,7 @@ class CydiaLogCleaner :
 
         lprintf("O:%s\n", line.c_str());
 
-        CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:line.c_str()] ofType:kCydiaProgressEventTypeInformation]);
+        PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:[NSString stringWithUTF8String:line.c_str()] ofType:kPhalenaProgressEventTypeInformation]);
         [progress_ performSelectorOnMainThread:@selector(addProgressEvent:) withObject:event waitUntilDone:YES];
 
         [pool release];
@@ -3498,13 +3498,13 @@ class CydiaLogCleaner :
         int fds[2];
 
         _assert(pipe(fds) != -1);
-        cydiafd_ = fds[1];
+        phalenafd_ = fds[1];
 
-        _config->Set("APT::Keep-Fds::", cydiafd_);
-        setenv("CYDIA", [[[[NSNumber numberWithInt:cydiafd_] stringValue] stringByAppendingString:@" 1"] UTF8String], _not(int));
+        _config->Set("APT::Keep-Fds::", phalenafd_);
+        setenv("PHALENA", [[[[NSNumber numberWithInt:phalenafd_] stringValue] stringByAppendingString:@" 1"] UTF8String], _not(int));
 
         [NSThread
-            detachNewThreadSelector:@selector(_readCydia:)
+            detachNewThreadSelector:@selector(_readPhalena:)
             toTarget:self
             withObject:[NSNumber numberWithInt:fds[0]]
         ];
@@ -3597,7 +3597,7 @@ class CydiaLogCleaner :
         if (warning && no_pubkey(error.c_str()))
             continue;
 
-        [delegate_ addProgressEventOnMainThread:[CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:(warning ? kCydiaProgressEventTypeWarning : kCydiaProgressEventTypeError)] forTask:title];
+        [delegate_ addProgressEventOnMainThread:[PhalenaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:(warning ? kPhalenaProgressEventTypeWarning : kPhalenaProgressEventTypeError)] forTask:title];
     }
 
     return fatal;
@@ -3622,7 +3622,7 @@ class CydiaLogCleaner :
     std::string base("/etc/apt/sources.list.d");
     if (DIR *sources = opendir(base.c_str())) {
         while (dirent *source = readdir(sources))
-            if (source->d_name[0] != '.' && source->d_namlen > 5 && strcmp(source->d_name + source->d_namlen - 5, ".list") == 0 && strcmp(source->d_name, "cydia.list") != 0)
+            if (source->d_name[0] != '.' && source->d_namlen > 5 && strcmp(source->d_name + source->d_namlen - 5, ".list") == 0 && strcmp(source->d_name, "phalena.list") != 0)
                 error |= [self popErrorWithTitle:title forOperation:list.ReadAppend((base + "/" + source->d_name).c_str())];
         closedir(sources);
     }
@@ -3665,7 +3665,7 @@ class CydiaLogCleaner :
     NSRecycleZone(zone_);
     zone_ = NSCreateZone(1024 * 1024, 256 * 1024, NO);
 
-    int chk(creat("/tmp/cydia.chk", 0644));
+    int chk(creat("/tmp/phalena.chk", 0644));
     if (chk != -1)
         close(chk);
 
@@ -3703,7 +3703,7 @@ class CydiaLogCleaner :
 
             lprintf("cache_.Open():[%s]\n", error.c_str());
 
-            [delegate_ addProgressEventOnMainThread:[CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:(warning ? kCydiaProgressEventTypeWarning : kCydiaProgressEventTypeError)] forTask:title];
+            [delegate_ addProgressEventOnMainThread:[PhalenaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:(warning ? kPhalenaProgressEventTypeWarning : kPhalenaProgressEventTypeError)] forTask:title];
 
             SEL repair(NULL);
             if (false);
@@ -3728,7 +3728,7 @@ class CydiaLogCleaner :
         return;
     _trace();
 
-    unlink("/tmp/cydia.chk");
+    unlink("/tmp/phalena.chk");
 
     now_ = [[NSDate date] timeIntervalSince1970];
 
@@ -3739,7 +3739,7 @@ class CydiaLogCleaner :
     lock_ = NULL;
 
     if (cache_->DelCount() != 0 || cache_->InstCount() != 0) {
-        [delegate_ addProgressEventOnMainThread:[CydiaProgressEvent eventWithMessage:UCLocalize("COUNTS_NONZERO_EX") ofType:kCydiaProgressEventTypeError] forTask:title];
+        [delegate_ addProgressEventOnMainThread:[PhalenaProgressEvent eventWithMessage:UCLocalize("COUNTS_NONZERO_EX") ofType:kPhalenaProgressEventTypeError] forTask:title];
         return;
     }
 
@@ -3755,7 +3755,7 @@ class CydiaLogCleaner :
         _end
 
         if (cache_->BrokenCount() != 0) {
-            [delegate_ addProgressEventOnMainThread:[CydiaProgressEvent eventWithMessage:UCLocalize("STILL_BROKEN_EX") ofType:kCydiaProgressEventTypeError] forTask:title];
+            [delegate_ addProgressEventOnMainThread:[PhalenaProgressEvent eventWithMessage:UCLocalize("STILL_BROKEN_EX") ofType:kPhalenaProgressEventTypeError] forTask:title];
             return;
         }
 
@@ -3922,7 +3922,7 @@ class CydiaLogCleaner :
     pkgAcquire fetcher;
     fetcher.Clean(_config->FindDir("Dir::Cache::Archives"));
 
-    CydiaLogCleaner cleaner;
+    PhalenaLogCleaner cleaner;
     if ([self popErrorWithTitle:title forOperation:cleaner.Go(_config->FindDir("Dir::Cache::Archives") + "partial/", cache_)])
         return false;
 
@@ -3988,7 +3988,7 @@ class CydiaLogCleaner :
         lprintf("pAf:%s:%s\n", uri.c_str(), error.c_str());
         failed = true;
 
-        CydiaProgressEvent *event([CydiaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:kCydiaProgressEventTypeError]);
+        PhalenaProgressEvent *event([PhalenaProgressEvent eventWithMessage:[NSString stringWithUTF8String:error.c_str()] ofType:kPhalenaProgressEventTypeError]);
         [delegate_ addProgressEventOnMainThread:event forTask:title];
     }
 
@@ -4003,7 +4003,7 @@ class CydiaLogCleaner :
         RestartSubstrate_ = true;
 
     if (![delock_ isEqual:GetStatusDate()]) {
-        [delegate_ addProgressEventOnMainThread:[CydiaProgressEvent eventWithMessage:UCLocalize("DPKG_LOCKED") ofType:kCydiaProgressEventTypeError] forTask:title];
+        [delegate_ addProgressEventOnMainThread:[PhalenaProgressEvent eventWithMessage:UCLocalize("DPKG_LOCKED") ofType:kPhalenaProgressEventTypeError] forTask:title];
         return;
     }
 
@@ -4016,7 +4016,7 @@ class CydiaLogCleaner :
 
     struct stat info;
     if (stat([nextended UTF8String], &info) != -1 && (info.st_mode & S_IFMT) == S_IFREG)
-        system([[NSString stringWithFormat:@"/usr/libexec/cydia/cydo /bin/cp --remove-destination %@ %@", ShellEscape(nextended), ShellEscape(oextended)] UTF8String]);
+        system([[NSString stringWithFormat:@"/usr/libexec/phalena/cydo /bin/cp --remove-destination %@ %@", ShellEscape(nextended), ShellEscape(oextended)] UTF8String]);
 
     unlink([nextended UTF8String]);
     symlink([oextended UTF8String], [nextended UTF8String]);
@@ -4151,24 +4151,24 @@ class CydiaLogCleaner :
 @end
 /* }}} */
 
-@interface CydiaObject : CyteObject {
+@interface PhalenaObject : CyteObject {
     _transient id delegate_;
 }
 
 @end
 
-@interface CydiaWebViewController : CyteWebViewController {
-    _H<CydiaObject> cydia_;
+@interface PhalenaWebViewController : CyteWebViewController {
+    _H<PhalenaObject> phalena_;
 }
 
 + (NSURLRequest *) requestWithHeaders:(NSURLRequest *)request;
-+ (void) didClearWindowObject:(WebScriptObject *)window forFrame:(WebFrame *)frame withCydia:(CydiaObject *)cydia;
++ (void) didClearWindowObject:(WebScriptObject *)window forFrame:(WebFrame *)frame withPhalena:(PhalenaObject *)phalena;
 - (void) setDelegate:(id)delegate;
 
 @end
 
 /* Web Scripting {{{ */
-@implementation CydiaObject
+@implementation PhalenaObject
 
 - (void) setDelegate:(id)delegate {
     delegate_ = delegate;
@@ -4187,7 +4187,7 @@ class CydiaLogCleaner :
 }
 
 - (NSString *) version {
-    return Cydia_;
+    return Phalena_;
 }
 
 - (NSString *) device {
@@ -4423,7 +4423,7 @@ class CydiaLogCleaner :
 - (NSNumber *) du:(NSString *)path {
     NSNumber *value(nil);
 
-    FILE *du(popen([[NSString stringWithFormat:@"/usr/libexec/cydia/cydo /usr/libexec/cydia/du -ks %@", ShellEscape(path)] UTF8String], "r"));
+    FILE *du(popen([[NSString stringWithFormat:@"/usr/libexec/phalena/cydo /usr/libexec/phalena/du -ks %@", ShellEscape(path)] UTF8String], "r"));
     if (du != NULL) {
         char line[1024];
         while (fgets(line, sizeof(line), du) != NULL) {
@@ -4469,12 +4469,12 @@ class CydiaLogCleaner :
 @end
 /* }}} */
 
-@interface NSURL (CydiaSecure)
+@interface NSURL (PhalenaSecure)
 @end
 
-@implementation NSURL (CydiaSecure)
+@implementation NSURL (PhalenaSecure)
 
-- (bool) isCydiaSecure {
+- (bool) isPhalenaSecure {
     if ([[[self scheme] lowercaseString] isEqualToString:@"https"])
         return true;
 
@@ -4488,22 +4488,22 @@ class CydiaLogCleaner :
 
 @end
 
-/* Cydia Browser Controller {{{ */
-@implementation CydiaWebViewController
+/* Phalena Browser Controller {{{ */
+@implementation PhalenaWebViewController
 
 - (NSURL *) navigationURL {
     if (NSURLRequest *request = self.request)
-        return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://url/%@", [[request URL] absoluteString]]];
+        return [NSURL URLWithString:[NSString stringWithFormat:@"phalena://url/%@", [[request URL] absoluteString]]];
     else
         return nil;
 }
 
 - (void) webView:(WebView *)view didClearWindowObject:(WebScriptObject *)window forFrame:(WebFrame *)frame {
     [super webView:view didClearWindowObject:window forFrame:frame];
-    [CydiaWebViewController didClearWindowObject:window forFrame:frame withCydia:cydia_];
+    [PhalenaWebViewController didClearWindowObject:window forFrame:frame withPhalena:phalena_];
 }
 
-+ (void) didClearWindowObject:(WebScriptObject *)window forFrame:(WebFrame *)frame withCydia:(CydiaObject *)cydia {
++ (void) didClearWindowObject:(WebScriptObject *)window forFrame:(WebFrame *)frame withPhalena:(PhalenaObject *)phalena {
     WebDataSource *source([frame dataSource]);
     NSURLResponse *response([source response]);
     NSURL *url([response URL]);
@@ -4520,22 +4520,22 @@ class CydiaLogCleaner :
     }
 
     if (bridged)
-        [window setValue:cydia forKey:@"cydia"];
+        [window setValue:phalena forKey:@"phalena"];
 }
 
 - (void) _setupMail:(MFMailComposeViewController *)controller {
-    [controller addAttachmentData:[NSData dataWithContentsOfFile:@"/tmp/cydia.log"] mimeType:@"text/plain" fileName:@"cydia.log"];
+    [controller addAttachmentData:[NSData dataWithContentsOfFile:@"/tmp/phalena.log"] mimeType:@"text/plain" fileName:@"phalena.log"];
 
     system("/usr/bin/dpkg -l >/tmp/dpkgl.log");
     [controller addAttachmentData:[NSData dataWithContentsOfFile:@"/tmp/dpkgl.log"] mimeType:@"text/plain" fileName:@"dpkgl.log"];
 }
 
 - (NSURLRequest *) webView:(WebView *)view resource:(id)resource willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response fromDataSource:(WebDataSource *)source {
-    return [CydiaWebViewController requestWithHeaders:[super webView:view resource:resource willSendRequest:request redirectResponse:response fromDataSource:source]];
+    return [PhalenaWebViewController requestWithHeaders:[super webView:view resource:resource willSendRequest:request redirectResponse:response fromDataSource:source]];
 }
 
 - (NSURLRequest *) webThreadWebView:(WebView *)view resource:(id)resource willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response fromDataSource:(WebDataSource *)source {
-    return [CydiaWebViewController requestWithHeaders:[super webThreadWebView:view resource:resource willSendRequest:request redirectResponse:response fromDataSource:source]];
+    return [PhalenaWebViewController requestWithHeaders:[super webThreadWebView:view resource:resource willSendRequest:request redirectResponse:response fromDataSource:source]];
 }
 
 + (NSURLRequest *) requestWithHeaders:(NSURLRequest *)request {
@@ -4545,7 +4545,7 @@ class CydiaLogCleaner :
     NSString *href([url absoluteString]);
     NSString *host([url host]);
 
-    if ([href hasPrefix:@"https://cydia.saurik.com/TSS/"]) {
+    if ([href hasPrefix:@"https://phalena.saurik.com/TSS/"]) {
         if (NSString *agent = [copy valueForHTTPHeaderField:@"X-User-Agent"]) {
             [copy setValue:agent forHTTPHeaderField:@"User-Agent"];
             [copy setValue:nil forHTTPHeaderField:@"X-User-Agent"];
@@ -4558,8 +4558,8 @@ class CydiaLogCleaner :
         return copy;
     }
 
-    if ([copy valueForHTTPHeaderField:@"X-Cydia-Cf"] == nil)
-        [copy setValue:[NSString stringWithFormat:@"%.2f", kCFCoreFoundationVersionNumber] forHTTPHeaderField:@"X-Cydia-Cf"];
+    if ([copy valueForHTTPHeaderField:@"X-Phalena-Cf"] == nil)
+        [copy setValue:[NSString stringWithFormat:@"%.2f", kCFCoreFoundationVersionNumber] forHTTPHeaderField:@"X-Phalena-Cf"];
     if (Machine_ != NULL && [copy valueForHTTPHeaderField:@"X-Machine"] == nil)
         [copy setValue:[NSString stringWithUTF8String:Machine_] forHTTPHeaderField:@"X-Machine"];
 
@@ -4567,26 +4567,26 @@ class CydiaLogCleaner :
         bridged = [BridgedHosts_ containsObject:host];
     }
 
-    if ([url isCydiaSecure] && bridged && UniqueID_ != nil && [copy valueForHTTPHeaderField:@"X-Cydia-Id"] == nil)
-        [copy setValue:UniqueID_ forHTTPHeaderField:@"X-Cydia-Id"];
+    if ([url isPhalenaSecure] && bridged && UniqueID_ != nil && [copy valueForHTTPHeaderField:@"X-Phalena-Id"] == nil)
+        [copy setValue:UniqueID_ forHTTPHeaderField:@"X-Phalena-Id"];
 
     return copy;
 }
 
 - (void) setDelegate:(id)delegate {
     [super setDelegate:delegate];
-    [cydia_ setDelegate:delegate];
+    [phalena_ setDelegate:delegate];
 }
 
 - (id) init {
-    if ((self = [super initWithWidth:0 ofClass:[CydiaWebViewController class]]) != nil) {
-        cydia_ = [[[CydiaObject alloc] initWithDelegate:self.indirect] autorelease];
+    if ((self = [super initWithWidth:0 ofClass:[PhalenaWebViewController class]]) != nil) {
+        phalena_ = [[[PhalenaObject alloc] initWithDelegate:self.indirect] autorelease];
     } return self;
 }
 
 @end
 
-@interface AppCacheController : CydiaWebViewController {
+@interface AppCacheController : PhalenaWebViewController {
 }
 
 @end
@@ -4626,7 +4626,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 - (void) queue;
 @end
 
-@interface ConfirmationController : CydiaWebViewController {
+@interface ConfirmationController : PhalenaWebViewController {
     _transient Database *database_;
 
     _H<UIAlertView> essential_;
@@ -4687,7 +4687,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
         (id) issues_, @"issues",
         (id) sizes_, @"sizes",
         self, @"queue",
-    nil] Cydia$webScriptObjectInContext:window] forKey:@"cydiaConfirm"];
+    nil] Phalena$webScriptObjectInContext:window] forKey:@"phalenaConfirm"];
 }
 
 - (id) initWithDatabase:(Database *)database {
@@ -4910,7 +4910,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 /* }}} */
 
 /* Progress Data {{{ */
-@interface CydiaProgressData : NSObject {
+@interface PhalenaProgressData : NSObject {
     _transient id delegate_;
 
     bool running_;
@@ -4929,7 +4929,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 
 @end
 
-@implementation CydiaProgressData
+@implementation PhalenaProgressData
 
 + (NSArray *) _attributeKeys {
     return [NSArray arrayWithObjects:
@@ -5006,7 +5006,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
     [events_ removeAllObjects];
 }
 
-- (void) addEvent:(CydiaProgressEvent *)event {
+- (void) addEvent:(PhalenaProgressEvent *)event {
     [events_ addObject:event];
 }
 
@@ -5037,11 +5037,11 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 @end
 /* }}} */
 /* Progress Controller {{{ */
-@interface ProgressController : CydiaWebViewController <
+@interface ProgressController : PhalenaWebViewController <
     ProgressDelegate
 > {
     _transient Database *database_;
-    _H<CydiaProgressData, 1> progress_;
+    _H<PhalenaProgressData, 1> progress_;
     unsigned cancel_;
 }
 
@@ -5081,7 +5081,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 
         [database_ setProgressDelegate:self];
 
-        progress_ = [[[CydiaProgressData alloc] init] autorelease];
+        progress_ = [[[PhalenaProgressData alloc] init] autorelease];
         [progress_ setDelegate:self];
 
         [self setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/#!/progress/", UI_]]];
@@ -5096,11 +5096,11 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 
 - (void) webView:(WebView *)view didClearWindowObject:(WebScriptObject *)window forFrame:(WebFrame *)frame {
     [super webView:view didClearWindowObject:window forFrame:frame];
-    [window setValue:progress_ forKey:@"cydiaProgress"];
+    [window setValue:progress_ forKey:@"phalenaProgress"];
 }
 
 - (void) updateProgress {
-    [self dispatchEvent:@"CydiaProgressUpdate"];
+    [self dispatchEvent:@"PhalenaProgressUpdate"];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -5116,7 +5116,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 
     switch (Finish_) {
         case 0:
-            [self.delegate returnToCydia];
+            [self.delegate returnToPhalena];
         break;
 
         case 1:
@@ -5238,8 +5238,8 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
     RestartSubstrate_ = false;
 
     switch (Finish_) {
-        case 0: [progress_ setFinish:UCLocalize("RETURN_TO_CYDIA")]; break; /* XXX: Maybe UCLocalize("DONE")? */
-        case 1: [progress_ setFinish:UCLocalize("CLOSE_CYDIA")]; break;
+        case 0: [progress_ setFinish:UCLocalize("RETURN_TO_PHALENA")]; break; /* XXX: Maybe UCLocalize("DONE")? */
+        case 1: [progress_ setFinish:UCLocalize("CLOSE_PHALENA")]; break;
         case 2: [progress_ setFinish:UCLocalize("RESTART_SPRINGBOARD")]; break;
         case 3: [progress_ setFinish:UCLocalize("RELOAD_SPRINGBOARD")]; break;
         case 4: [progress_ setFinish:UCLocalize("REBOOT_DEVICE")]; break;
@@ -5253,7 +5253,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
     [self applyRightButton];
 }
 
-- (void) addProgressEvent:(CydiaProgressEvent *)event {
+- (void) addProgressEvent:(PhalenaProgressEvent *)event {
     [progress_ addEvent:event];
     [self updateProgress];
 }
@@ -5673,7 +5673,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 }
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://package/%@/files", [package_ id]]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"phalena://package/%@/files", [package_ id]]];
 }
 
 - (CGFloat) rowHeight {
@@ -5736,7 +5736,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 @end
 /* }}} */
 /* Package Controller {{{ */
-@interface CYPackageController : CydiaWebViewController <
+@interface CYPackageController : PhalenaWebViewController <
     UIActionSheetDelegate
 > {
     _transient Database *database_;
@@ -5756,7 +5756,7 @@ bool DepSubstrate(const pkgCache::VerIterator &iterator) {
 @implementation CYPackageController
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://package/%@", (id) name_]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"phalena://package/%@", (id) name_]];
 }
 
 - (void) _clickButtonWithPackage:(Package *)package {
@@ -6228,7 +6228,7 @@ typedef Function<void, NSMutableArray *> PackageSorter;
 /* }}} */
 
 /* Home Controller {{{ */
-@interface HomeController : CydiaWebViewController {
+@interface HomeController : PhalenaWebViewController {
     CFRunLoopRef runloop_;
     SCNetworkReachabilityRef reachability_;
 }
@@ -6238,7 +6238,7 @@ typedef Function<void, NSMutableArray *> PackageSorter;
 @implementation HomeController
 
 static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachability, SCNetworkReachabilityFlags flags, void *info) {
-    [(HomeController *) info dispatchEvent:@"CydiaReachabilityCallback"];
+    [(HomeController *) info dispatchEvent:@"PhalenaReachabilityCallback"];
 }
 
 - (id) init {
@@ -6246,7 +6246,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
         [self setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/#!/home/", UI_]]];
         [self reloadData];
 
-        reachability_ = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "cydia.saurik.com");
+        reachability_ = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "phalena.saurik.com");
         if (reachability_ != NULL) {
             SCNetworkReachabilityContext context = {0, self, NULL, NULL, NULL};
             SCNetworkReachabilitySetCallback(reachability_, HomeControllerReachabilityCallback, &context);
@@ -6265,13 +6265,13 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 }
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:@"cydia://home"];
+    return [NSURL URLWithString:@"phalena://home"];
 }
 
 - (void) aboutButtonClicked {
     UIAlertView *alert([[[UIAlertView alloc] init] autorelease]);
 
-    [alert setTitle:UCLocalize("ABOUT_CYDIA")];
+    [alert setTitle:UCLocalize("ABOUT_PHALENA")];
     [alert addButtonWithTitle:UCLocalize("CLOSE")];
     [alert setCancelButtonIndex:0];
 
@@ -6299,8 +6299,8 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 @end
 /* }}} */
 
-/* Cydia Tab Bar Controller {{{ */
-@interface CydiaTabBarController : CyteTabBarController <
+/* Phalena Tab Bar Controller {{{ */
+@interface PhalenaTabBarController : CyteTabBarController <
     UITabBarControllerDelegate,
     FetchDelegate
 > {
@@ -6310,7 +6310,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 
     bool updating_;
     // XXX: ok, "updatedelegate_"?...
-    _transient NSObject<CydiaDelegate> *updatedelegate_;
+    _transient NSObject<PhalenaDelegate> *updatedelegate_;
 }
 
 - (void) beginUpdate;
@@ -6318,7 +6318,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 
 @end
 
-@implementation CydiaTabBarController
+@implementation PhalenaTabBarController
 
 - (id) initWithDatabase:(Database *)database {
     if ((self = [super init]) != nil) {
@@ -6418,16 +6418,16 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 @end
 /* }}} */
 
-/* Cydia:// Protocol {{{ */
-@interface CydiaURLProtocol : CyteURLProtocol {
+/* Phalena:// Protocol {{{ */
+@interface PhalenaURLProtocol : CyteURLProtocol {
 }
 
 @end
 
-@implementation CydiaURLProtocol
+@implementation PhalenaURLProtocol
 
 + (NSString *) scheme {
-    return @"cydia";
+    return @"phalena";
 }
 
 - (bool) loadForPath:(NSString *)path ofRequest:(NSURLRequest *)request {
@@ -6524,7 +6524,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     name = name ?: @"*";
     NSString *key(key_);
     key = key ?: @"*";
-    return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://sections/%@/%@", [key stringByAddingPercentEscapesIncludingReserved], [name stringByAddingPercentEscapesIncludingReserved]]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"phalena://sections/%@/%@", [key stringByAddingPercentEscapesIncludingReserved], [name stringByAddingPercentEscapesIncludingReserved]]];
 }
 
 - (id) initWithDatabase:(Database *)database source:(Source *)source section:(NSString *)section {
@@ -6584,7 +6584,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 @implementation SectionsController
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://sources/%@", [key_ stringByAddingPercentEscapesIncludingReserved]]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"phalena://sources/%@", [key_ stringByAddingPercentEscapesIncludingReserved]]];
 }
 
 - (Source *) source {
@@ -6795,7 +6795,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 }
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:@"cydia://changes"];
+    return [NSURL URLWithString:@"phalena://changes"];
 }
 
 - (Package *) packageAtIndexPath:(NSIndexPath *)path {
@@ -6986,9 +6986,9 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 
 - (NSURL *) navigationURL {
     if ([search_ text] == nil || [[search_ text] isEqualToString:@""])
-        return [NSURL URLWithString:@"cydia://search"];
+        return [NSURL URLWithString:@"phalena://search"];
     else
-        return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://search/%@", [[search_ text] stringByAddingPercentEscapesIncludingReserved]]];
+        return [NSURL URLWithString:[NSString stringWithFormat:@"phalena://search/%@", [[search_ text] stringByAddingPercentEscapesIncludingReserved]]];
 }
 
 - (NSArray *) termsForQuery:(NSString *)query {
@@ -7151,7 +7151,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 @implementation PackageSettingsController
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"cydia://package/%@/settings", (id) name_]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"phalena://package/%@/settings", (id) name_]];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -7195,7 +7195,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     const char *package([name_ UTF8String]);
     bool on([ignoredSwitch_ isOn]);
 
-    FILE *dpkg(popen("/usr/libexec/cydia/cydo --set-selections", "w"));
+    FILE *dpkg(popen("/usr/libexec/phalena/cydo --set-selections", "w"));
     fwrite(package, strlen(package), 1, dpkg);
 
     if (on)
@@ -7314,7 +7314,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 }
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:@"cydia://installed"];
+    return [NSURL URLWithString:@"phalena://installed"];
 }
 
 - (void) useRecent {
@@ -7593,7 +7593,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     NSURLConnection *trivial_bz2_;
     NSURLConnection *trivial_gz_;
 
-    BOOL cydia_;
+    BOOL phalena_;
 }
 
 - (id) initWithDatabase:(Database *)database;
@@ -7619,7 +7619,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 }
 
 - (NSURL *) navigationURL {
-    return [NSURL URLWithString:@"cydia://sources"];
+    return [NSURL URLWithString:@"phalena://sources"];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -7719,7 +7719,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     if (colon.location != NSNotFound)
         href = [href substringFromIndex:(colon.location + 3)];
     href = [href stringByAddingPercentEscapes];
-    href = [CydiaURL(@"api/repotag/") stringByAppendingString:href];
+    href = [PhalenaURL(@"api/repotag/") stringByAppendingString:href];
 
     NSURL *url([NSURL URLWithString:href]);
 
@@ -7747,14 +7747,14 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
         trivial_bz2_ == nil &&
         trivial_gz_ == nil
     ) {
-        NSString *warning(cydia_ ? [self yieldToSelector:@selector(getWarning)] : nil);
+        NSString *warning(phalena_ ? [self yieldToSelector:@selector(getWarning)] : nil);
 
         [self.delegate releaseNetworkActivityIndicator];
 
         [self.delegate removeProgressHUD:hud_];
         hud_ = nil;
 
-        if (cydia_) {
+        if (phalena_) {
             if (warning != nil) {
                 UIAlertView *alert = [[[UIAlertView alloc]
                     initWithTitle:UCLocalize("SOURCE_WARNING")
@@ -7811,7 +7811,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
     switch ([response statusCode]) {
         case 200:
-            cydia_ = YES;
+            phalena_ = YES;
     }
 }
 
@@ -7842,9 +7842,9 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     if (UniqueID_ != nil)
         [request setValue:UniqueID_ forHTTPHeaderField:@"X-Unique-ID"];
 
-    if ([url isCydiaSecure]) {
+    if ([url isPhalenaSecure]) {
         if (UniqueID_ != nil)
-            [request setValue:UniqueID_ forHTTPHeaderField:@"X-Cydia-Id"];
+            [request setValue:UniqueID_ forHTTPHeaderField:@"X-Phalena-Id"];
     }
 
     return [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
@@ -7865,7 +7865,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
                 trivial_bz2_ = [[self _requestHRef:[href_ stringByAppendingString:@"Packages.bz2"] method:@"HEAD"] retain];
                 trivial_gz_ = [[self _requestHRef:[href_ stringByAppendingString:@"Packages.gz"] method:@"HEAD"] retain];
 
-                cydia_ = false;
+                phalena_ = false;
 
                 // XXX: this is stupid
                 hud_ = [self.delegate addProgressHUD];
@@ -8110,13 +8110,13 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 @end
 /* }}} */
 
-@interface Cydia : CyteApplication <
+@interface Phalena : CyteApplication <
     ConfirmationControllerDelegate,
     DatabaseDelegate,
-    CydiaDelegate
+    PhalenaDelegate
 > {
     _H<CyteWindow> window_;
-    _H<CydiaTabBarController> tabbar_;
+    _H<PhalenaTabBarController> tabbar_;
     _H<CyteTabBarController> emulated_;
     _H<AppCacheController> appcache_;
 
@@ -8138,7 +8138,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 
 @end
 
-@implementation Cydia
+@implementation Phalena
 
 - (void) lockSuspend {
     if (locked_++ == 0) {
@@ -8167,7 +8167,7 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
 }
 
 - (bool) requestUpdate {
-    if (CyteIsReachable("cydia.saurik.com")) {
+    if (CyteIsReachable("phalena.saurik.com")) {
         [self beginUpdate];
         return true;
     } else {
@@ -8226,15 +8226,15 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     }
 }
 
-- (void) returnToCydia {
+- (void) returnToPhalena {
     [self _loaded];
 }
 
 - (void) reloadSpringBoard {
     if (kCFCoreFoundationVersionNumber >= 700) // XXX: iOS 6.x
-        system("/usr/libexec/cydia/cydo /bin/launchctl stop com.apple.backboardd");
+        system("/usr/libexec/phalena/cydo /bin/launchctl stop com.apple.backboardd");
     else
-        system("/usr/libexec/cydia/cydo /bin/launchctl stop com.apple.SpringBoard");
+        system("/usr/libexec/phalena/cydo /bin/launchctl stop com.apple.SpringBoard");
     sleep(15);
     system("/usr/bin/killall backboardd SpringBoard");
 }
@@ -8279,8 +8279,8 @@ static void HomeControllerReachabilityCallback(SCNetworkReachabilityRef reachabi
     //  - We already refreshed recently.
     //  - We already auto-refreshed this launch.
     //  - Auto-refresh is disabled.
-    //  - Cydia's server is not reachable
-    if (recently || loaded_ || ManualRefresh || !CyteIsReachable("cydia.saurik.com")) {
+    //  - Phalena's server is not reachable
+    if (recently || loaded_ || ManualRefresh || !CyteIsReachable("phalena.saurik.com")) {
         // If we are cancelling, we need to make sure it knows it's already loaded.
         loaded_ = true;
 
@@ -8432,16 +8432,16 @@ _end
 }
 
 - (void) addSource:(NSDictionary *) source {
-    CydiaAddSource(source);
+    PhalenaAddSource(source);
 }
 
 - (void) addSource:(NSString *)href withDistribution:(NSString *)distribution andSections:(NSArray *)sections {
-    CydiaAddSource(href, distribution, sections);
+    PhalenaAddSource(href, distribution, sections);
 }
 
 // XXX: this method should not return anything
 - (BOOL) addTrivialSource:(NSString *)href {
-    CydiaAddSource(href, @"./");
+    PhalenaAddSource(href, @"./");
     return YES;
 }
 
@@ -8579,7 +8579,7 @@ _end
                 for (Package *broken in (id) broken_) {
                     [broken remove];
                     NSString *id(ShellEscape([broken id]));
-                    system([[NSString stringWithFormat:@"/usr/libexec/cydia/cydo /bin/rm -f"
+                    system([[NSString stringWithFormat:@"/usr/libexec/phalena/cydo /bin/rm -f"
                         " /var/lib/dpkg/info/%@.prerm"
                         " /var/lib/dpkg/info/%@.postrm"
                         " /var/lib/dpkg/info/%@.preinst"
@@ -8647,7 +8647,7 @@ _end
     // XXX: what is the point of this? does this solve anything at all?
     uint64_t status = 0;
     int notify_token;
-    if (notify_register_check("com.saurik.Cydia.status", &notify_token) == NOTIFY_STATUS_OK) {
+    if (notify_register_check("com.saurik.Phalena.status", &notify_token) == NOTIFY_STATUS_OK) {
         notify_get_state(notify_token, &status);
         notify_cancel(notify_token);
     }
@@ -8736,7 +8736,7 @@ _end
         return controller;
     }
 
-    if ([components count] < 1 || ![scheme isEqualToString:@"cydia"])
+    if ([components count] < 1 || ![scheme isEqualToString:@"phalena"])
         return nil;
 
     NSString *base([components objectAtIndex:0]);
@@ -8746,7 +8746,7 @@ _end
     if ([base isEqualToString:@"url"]) {
         // This kind of URL can contain slashes in the argument, so we can't parse them below.
         NSString *destination = [[url absoluteString] substringFromIndex:([scheme length] + [@"://" length] + [base length] + [@"/" length])];
-        controller = [[[CydiaWebViewController alloc] initWithURL:[NSURL URLWithString:destination]] autorelease];
+        controller = [[[PhalenaWebViewController alloc] initWithURL:[NSURL URLWithString:destination]] autorelease];
     } else if (!external && [components count] == 1) {
         if ([base isEqualToString:@"sources"]) {
             controller = [[[SourcesController alloc] initWithDatabase:database_] autorelease];
@@ -8825,7 +8825,7 @@ _end
     return controller;
 }
 
-- (BOOL) openCydiaURL:(NSURL *)url forExternal:(BOOL)external {
+- (BOOL) openPhalenaURL:(NSURL *)url forExternal:(BOOL)external {
     CyteViewController *page([self pageForURL:url forExternal:external withReferrer:nil]);
 
     if (page != nil)
@@ -8840,7 +8840,7 @@ _end
     if (!loaded_)
         starturl_ = url;
     else
-        [self openCydiaURL:url forExternal:YES];
+        [self openPhalenaURL:url forExternal:YES];
 }
 
 - (void) applicationWillResignActive:(UIApplication *)application {
@@ -8885,7 +8885,7 @@ _end
     }
 
     if (interval <= -(15*60)) {
-        if (CyteIsReachable("cydia.saurik.com")) {
+        if (CyteIsReachable("phalena.saurik.com")) {
             [tabbar_ beginUpdate];
             [appcache_ reloadURLWithCache:YES];
         }
@@ -8937,7 +8937,7 @@ _end
 - (void) stash {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     UpdateExternalStatus(1);
-    [self yieldToSelector:@selector(system:) withObject:@"/usr/libexec/cydia/cydo /usr/libexec/cydia/free.sh"];
+    [self yieldToSelector:@selector(system:) withObject:@"/usr/libexec/phalena/cydo /usr/libexec/phalena/free.sh"];
     UpdateExternalStatus(0);
 
     [self removeStashController];
@@ -8948,12 +8948,12 @@ _end
     [super applicationDidFinishLaunching:unused];
     [CyteWebViewController _initialize];
 
-    [BridgedHosts_ addObject:[[NSURL URLWithString:CydiaURL(@"")] host]];
+    [BridgedHosts_ addObject:[[NSURL URLWithString:PhalenaURL(@"")] host]];
 
-    [NSURLProtocol registerClass:[CydiaURLProtocol class]];
+    [NSURLProtocol registerClass:[PhalenaURLProtocol class]];
 
     // this would disallow http{,s} URLs from accessing this data
-    //[WebView registerURLSchemeAsLocal:@"cydia"];
+    //[WebView registerURLSchemeAsLocal:@"phalena"];
 
     Font12_ = [UIFont systemFontOfSize:12];
     Font12Bold_ = [UIFont boldSystemFontOfSize:12];
@@ -8974,7 +8974,7 @@ _end
     [window_ makeKey:self];
     [window_ setHidden:NO];
 
-    if (access("/.cydia_no_stash", F_OK) == 0);
+    if (access("/.phalena_no_stash", F_OK) == 0);
     else {
 
     if (false) stash: {
@@ -9017,10 +9017,10 @@ _end
 
     [window_ setUserInteractionEnabled:NO];
 
-    tabbar_ = [[[CydiaTabBarController alloc] initWithDatabase:database_] autorelease];
+    tabbar_ = [[[PhalenaTabBarController alloc] initWithDatabase:database_] autorelease];
 
     [tabbar_ addViewControllers:nil,
-        @"Cydia", @"home.png", @"home7.png", @"home7s.png",
+        @"Phalena", @"home.png", @"home7.png", @"home7s.png",
         UCLocalize("SOURCES"), @"install.png", @"install7.png", @"install7s.png",
         UCLocalize("CHANGES"), @"changes.png", @"changes7.png", @"changes7s.png",
         UCLocalize("INSTALLED"), @"manage.png", @"manage7.png", @"manage7s.png",
@@ -9029,7 +9029,7 @@ _end
 
     [tabbar_ setUpdateDelegate:self];
 
-    CydiaLoadingViewController *loading([[[CydiaLoadingViewController alloc] init] autorelease]);
+    PhalenaLoadingViewController *loading([[[PhalenaLoadingViewController alloc] init] autorelease]);
     UINavigationController *navigation([[[UINavigationController alloc] init] autorelease]);
     [navigation setViewControllers:[NSArray arrayWithObject:loading]];
 
@@ -9048,11 +9048,11 @@ _trace();
 
 - (NSArray *) defaultStartPages {
     NSMutableArray *standard = [NSMutableArray array];
-    [standard addObject:[NSArray arrayWithObject:@"cydia://home"]];
-    [standard addObject:[NSArray arrayWithObject:@"cydia://sources"]];
-    [standard addObject:[NSArray arrayWithObject:@"cydia://changes"]];
-    [standard addObject:[NSArray arrayWithObject:@"cydia://installed"]];
-    [standard addObject:[NSArray arrayWithObject:@"cydia://search"]];
+    [standard addObject:[NSArray arrayWithObject:@"phalena://home"]];
+    [standard addObject:[NSArray arrayWithObject:@"phalena://sources"]];
+    [standard addObject:[NSArray arrayWithObject:@"phalena://changes"]];
+    [standard addObject:[NSArray arrayWithObject:@"phalena://installed"]];
+    [standard addObject:[NSArray arrayWithObject:@"phalena://search"]];
     return standard;
 }
 
@@ -9127,7 +9127,7 @@ _trace();
 
     // (Try to) show the startup URL.
     if (starturl_ != nil) {
-        [self openCydiaURL:starturl_ forExternal:YES];
+        [self openPhalenaURL:starturl_ forExternal:YES];
         starturl_ = nil;
     }
 }
@@ -9145,19 +9145,19 @@ _trace();
     }
 }
 
-- (void) addProgressEvent:(CydiaProgressEvent *)event forTask:(NSString *)task {
+- (void) addProgressEvent:(PhalenaProgressEvent *)event forTask:(NSString *)task {
     id<ProgressDelegate> progress([database_ progressDelegate] ?: [self invokeNewProgress:nil forController:nil withTitle:task]);
     [progress setTitle:task];
     [progress addProgressEvent:event];
 }
 
 - (void) addProgressEventForTask:(NSArray *)data {
-    CydiaProgressEvent *event([data objectAtIndex:0]);
+    PhalenaProgressEvent *event([data objectAtIndex:0]);
     NSString *task([data count] < 2 ? nil : [data objectAtIndex:1]);
     [self addProgressEvent:event forTask:task];
 }
 
-- (void) addProgressEventOnMainThread:(CydiaProgressEvent *)event forTask:(NSString *)task {
+- (void) addProgressEventOnMainThread:(PhalenaProgressEvent *)event forTask:(NSString *)task {
     [self performSelectorOnMainThread:@selector(addProgressEventForTask:) withObject:[NSArray arrayWithObjects:event, task, nil] waitUntilDone:YES];
 }
 
@@ -9229,7 +9229,7 @@ int main(int argc, char *argv[]) {
         return main_http();
     else {}
 
-    int fd(open("/tmp/cydia.log", O_WRONLY | O_APPEND | O_CREAT, 0644));
+    int fd(open("/tmp/phalena.log", O_WRONLY | O_APPEND | O_CREAT, 0644));
     dup2(fd, 2);
     close(fd);
 
@@ -9237,14 +9237,14 @@ int main(int argc, char *argv[]) {
 
     _trace();
 
-    CyteInitialize([NSString stringWithFormat:@"Cydia/%@", Cydia_]);
+    CyteInitialize([NSString stringWithFormat:@"Phalena/%@", Phalena_]);
     UpdateExternalStatus(0);
 
     SessionData_ = [NSMutableDictionary dictionaryWithCapacity:4];
     BridgedHosts_ = [NSMutableSet setWithCapacity:4];
     InsecureHosts_ = [NSMutableSet setWithCapacity:4];
 
-    UI_ = CydiaURL([NSString stringWithFormat:@"ui/ios~%@/1.1", IsWildcat_ ? @"ipad" : @"iphone"]);
+    UI_ = PhalenaURL([NSString stringWithFormat:@"ui/ios~%@/1.1", IsWildcat_ ? @"ipad" : @"iphone"]);
     PackageName = reinterpret_cast<CYString &(*)(Package *, SEL)>(method_getImplementation(class_getInstanceMethod([Package class], @selector(cyname))));
 
     /* Set Locale {{{ */
@@ -9254,7 +9254,7 @@ int main(int argc, char *argv[]) {
     std::string languages;
     const char *translation(NULL);
 
-    // XXX: this isn't really a language, but this is compatible with older Cydia builds
+    // XXX: this isn't really a language, but this is compatible with older Phalena builds
     if (Locale_ != NULL)
         if (const char *language = [(NSString *) CFLocaleGetIdentifier(Locale_) UTF8String]) {
             RegEx pattern("([a-z][a-z])(?:-[A-Za-z]*)?(_[A-Z][A-Z])?");
@@ -9333,7 +9333,7 @@ int main(int argc, char *argv[]) {
     App_ = [[NSBundle mainBundle] bundlePath];
     Advanced_ = YES;
 
-    Cache_ = [[NSString stringWithFormat:@"%@/Library/Caches/com.saurik.Cydia", @"/var/mobile"] retain];
+    Cache_ = [[NSString stringWithFormat:@"%@/Library/Caches/com.saurik.Phalena", @"/var/mobile"] retain];
     mkdir([Cache_ UTF8String], 0755);
 
     /*Method alloc = class_getClassMethod([NSObject class], @selector(alloc));
@@ -9365,17 +9365,17 @@ int main(int argc, char *argv[]) {
     SectionMap_ = [[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Sections" ofType:@"plist"]] autorelease];
 
     _trace();
-    mkdir("/var/mobile/Library/Cydia", 0755);
-    MetaFile_.Open("/var/mobile/Library/Cydia/metadata.cb0");
+    mkdir("/var/mobile/Library/Phalena", 0755);
+    MetaFile_.Open("/var/mobile/Library/Phalena/metadata.cb0");
     _trace();
 
-    Values_ = AutoreleaseDeepMutableCopyOfDictionary(CFPreferencesCopyAppValue(CFSTR("CydiaValues"), CFSTR("com.saurik.Cydia")));
-    Sections_ = AutoreleaseDeepMutableCopyOfDictionary(CFPreferencesCopyAppValue(CFSTR("CydiaSections"), CFSTR("com.saurik.Cydia")));
-    Sources_ = AutoreleaseDeepMutableCopyOfDictionary(CFPreferencesCopyAppValue(CFSTR("CydiaSources"), CFSTR("com.saurik.Cydia")));
-    Version_ = [(NSNumber *) CFPreferencesCopyAppValue(CFSTR("CydiaVersion"), CFSTR("com.saurik.Cydia")) autorelease];
+    Values_ = AutoreleaseDeepMutableCopyOfDictionary(CFPreferencesCopyAppValue(CFSTR("PhalenaValues"), CFSTR("com.saurik.Phalena")));
+    Sections_ = AutoreleaseDeepMutableCopyOfDictionary(CFPreferencesCopyAppValue(CFSTR("PhalenaSections"), CFSTR("com.saurik.Phalena")));
+    Sources_ = AutoreleaseDeepMutableCopyOfDictionary(CFPreferencesCopyAppValue(CFSTR("PhalenaSources"), CFSTR("com.saurik.Phalena")));
+    Version_ = [(NSNumber *) CFPreferencesCopyAppValue(CFSTR("PhalenaVersion"), CFSTR("com.saurik.Phalena")) autorelease];
 
     _trace();
-    NSDictionary *metadata([[[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/lib/cydia/metadata.plist"] autorelease]);
+    NSDictionary *metadata([[[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/lib/phalena/metadata.plist"] autorelease]);
 
     if (Values_ == nil)
         Values_ = [metadata objectForKey:@"Values"];
@@ -9407,9 +9407,9 @@ int main(int argc, char *argv[]) {
     }
 
     if ([Version_ unsignedIntValue] == 0) {
-        CydiaAddSource(@"http://apt.thebigboss.org/repofiles/cydia/", @"stable", [NSMutableArray arrayWithObject:@"main"]);
-        CydiaAddSource(@"http://apt.modmyi.com/", @"stable", [NSMutableArray arrayWithObject:@"main"]);
-        CydiaAddSource(@"http://cydia.zodttd.com/repo/cydia/", @"stable", [NSMutableArray arrayWithObject:@"main"]);
+        PhalenaAddSource(@"http://apt.thebigboss.org/repofiles/phalena/", @"stable", [NSMutableArray arrayWithObject:@"main"]);
+        PhalenaAddSource(@"http://apt.modmyi.com/", @"stable", [NSMutableArray arrayWithObject:@"main"]);
+        PhalenaAddSource(@"http://phalena.zodttd.com/repo/phalena/", @"stable", [NSMutableArray arrayWithObject:@"main"]);
 
         Version_ = [NSNumber numberWithUnsignedInt:1];
 
@@ -9429,30 +9429,30 @@ int main(int argc, char *argv[]) {
     broken = nil;
 
     SaveConfig(nil);
-    system("/usr/libexec/cydia/cydo /bin/rm -f /var/lib/cydia/metadata.plist");
+    system("/usr/libexec/phalena/cydo /bin/rm -f /var/lib/phalena/metadata.plist");
     /* }}} */
 
     Finishes_ = [NSArray arrayWithObjects:@"return", @"reopen", @"restart", @"reload", @"reboot", nil];
 
     if (kCFCoreFoundationVersionNumber > 1000)
-        system("/usr/libexec/cydia/cydo /usr/libexec/cydia/setnsfpn /var/lib");
+        system("/usr/libexec/phalena/cydo /usr/libexec/phalena/setnsfpn /var/lib");
 
-    int version([[NSString stringWithContentsOfFile:@"/var/lib/cydia/firmware.ver"] intValue]);
+    int version([[NSString stringWithContentsOfFile:@"/var/lib/phalena/firmware.ver"] intValue]);
 
     if (access("/User", F_OK) != 0 || version != 6) {
         _trace();
-        system("/usr/libexec/cydia/cydo /usr/libexec/cydia/firmware.sh");
+        system("/usr/libexec/phalena/cydo /usr/libexec/phalena/firmware.sh");
         _trace();
     }
 
-    if (access("/tmp/cydia.chk", F_OK) == 0) {
+    if (access("/tmp/phalena.chk", F_OK) == 0) {
         if (unlink([Cache("pkgcache.bin") UTF8String]) == -1)
             _assert(errno == ENOENT);
         if (unlink([Cache("srcpkgcache.bin") UTF8String]) == -1)
             _assert(errno == ENOENT);
     }
 
-    system([[NSString stringWithFormat:@"/usr/libexec/cydia/cydo /bin/ln -sf %@ /etc/apt/sources.list.d/cydia.list", Cache("sources.list")] UTF8String]);
+    system([[NSString stringWithFormat:@"/usr/libexec/phalena/cydo /bin/ln -sf %@ /etc/apt/sources.list.d/phalena.list", Cache("sources.list")] UTF8String]);
 
     /* APT Initialization {{{ */
     _assert(pkgInitConfig(*_config));
@@ -9461,7 +9461,7 @@ int main(int argc, char *argv[]) {
     _config->Set("Acquire::AllowInsecureRepositories", true);
     _config->Set("Acquire::Check-Valid-Until", false);
 
-    _config->Set("Dir::Bin::Methods", "/Applications/Cydia.app");
+    _config->Set("Dir::Bin::Methods", "/Applications/Phalena.app");
 
     _config->Set("pkgCacheGen::ForceEssential", "");
 
@@ -9490,11 +9490,11 @@ int main(int argc, char *argv[]) {
     mkdir([Cache("periodic") UTF8String], 0755);
     _config->Set("Dir::State::Lists", [Cache("lists") UTF8String]);
 
-    std::string logs("/var/mobile/Library/Logs/Cydia");
+    std::string logs("/var/mobile/Library/Logs/Phalena");
     mkdir(logs.c_str(), 0755);
     _config->Set("Dir::Log", logs);
 
-    _config->Set("Dir::Bin::dpkg", "/usr/libexec/cydia/cydo");
+    _config->Set("Dir::Bin::dpkg", "/usr/libexec/phalena/cydo");
     /* }}} */
     /* Color Choices {{{ */
     space_ = CGColorSpaceCreateDeviceRGB();
@@ -9533,7 +9533,7 @@ int main(int argc, char *argv[]) {
     Warning_ = UCLocalize("WARNING");
 
     _trace();
-    int value(UIApplicationMain(argc, argv, @"Cydia", @"Cydia"));
+    int value(UIApplicationMain(argc, argv, @"Phalena", @"Phalena"));
 
     CGColorSpaceRelease(space_);
     CFRelease(Locale_);

@@ -1,16 +1,16 @@
 #!/bin/bash
 
-declare -a cydia
-cydia=($CYDIA)
+declare -a phalena
+phalena=($PHALENA)
 
 if [[ $1 == upgrade ]]; then
-    if [[ ${CYDIA+@} ]]; then
-        if [[ ${cydia[1]} -lt 1 ]]; then
-            echo 'PLEASE RESTART CYDIA!'
-            echo 'PLEASE RESTART CYDIA!'
-            echo 'PLEASE RESTART CYDIA!'
+    if [[ ${PHALENA+@} ]]; then
+        if [[ ${phalena[1]} -lt 1 ]]; then
+            echo 'PLEASE RESTART PHALENA!'
+            echo 'PLEASE RESTART PHALENA!'
+            echo 'PLEASE RESTART PHALENA!'
         else
-            eval "echo 'finish:reopen' >&${cydia[0]}"
+            eval "echo 'finish:reopen' >&${phalena[0]}"
         fi
     fi
 fi

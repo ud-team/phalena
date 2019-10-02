@@ -1,5 +1,5 @@
 "ABOUT" = "Giới thiệu";
-"ABOUT_CYDIA" = "Giới thiệu về Trình Cài Đặt Cydia";
+"ABOUT_PHALENA" = "Giới thiệu về Trình Cài Đặt Phalena";
 "ACCEPT_NEW_COPY" = "Chấp Nhận Bản Mới";
 "ADD" = "Thêm";
 "ADD_ANYWAY" = "Dù Sao Cũng Thêm";
@@ -22,7 +22,7 @@
 "CLEAN_ARCHIVES" = "Xóa Lưu Trữ";
 "CLEAR" = "Xóa";
 "CLOSE" = "Đóng";
-"CLOSE_CYDIA" = "Đóng Cydia";
+"CLOSE_PHALENA" = "Đóng Phalena";
 "COLON_DELIMITED" = "%@: %@";
 "COMMA_DELIMITED" = "%@, %@";
 "COMPLETE" = "Hoàn tất";
@@ -45,13 +45,13 @@
 "DOWNLOADING_" = "Đang tải về %@";
 "EDIT" = "Sửa";
 "ELISION" = "%@...";
-"ENTER_APT_URL" = "Nhập URL Cydia/APT";
+"ENTER_APT_URL" = "Nhập URL Phalena/APT";
 "ERROR" = "Lỗi";
 "ESSENTIAL_UPGRADE" = "Nâng Cấp Thiết Yếu";
 "ESSENTIAL_UPGRADES" = "%d Nâng Cấp Thiết Yếu";
 "ESSENTIAL_UPGRADE_EX" = "Một hoặc nhiều gói thiết yếu hiện đã lỗi thời. Nếu những gói nâng cấp này không được thực hiện, có khả năng bạn sẽ gặp lỗi.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Cydia sẽ thoát khi hoàn tất.)";
+"EXIT_WHEN_COMPLETE" = "(Phalena sẽ thoát khi hoàn tất.)";
 "EXPERT" = "Chuyên gia";
 "FILES" = "Tập tin";
 "FILESYSTEM_CONTENT" = "Nội Dung Hệ Thống Tập Tin";
@@ -127,15 +127,15 @@
 "RELOAD_SPRINGBOARD" = "Tải Lại SpringBoard";
 "REMOVE" = "Xóa";
 "REMOVING_ESSENTIALS" = "Xóa Các Gói Thiết Yếu";
-"REMOVING_ESSENTIALS_EX" = "Thao tác này gồm có xóa một hoặc nhiều gói cần thiết để tiếp tục vận hành Cydia hoặc iOS. Nếu bạn tiếp tục, bạn có thể không sử dụng Cydia được để sửa chữa bất kỳ hư hỏng nào.";
+"REMOVING_ESSENTIALS_EX" = "Thao tác này gồm có xóa một hoặc nhiều gói cần thiết để tiếp tục vận hành Phalena hoặc iOS. Nếu bạn tiếp tục, bạn có thể không sử dụng Phalena được để sửa chữa bất kỳ hư hỏng nào.";
 "REPAIRING" = "Sửa chữa";
 "REQUEST_ADVERTISING_SPACE" = "Yêu Cầu Không Gian Quảng Cáo";
 "REQUIREMENTS_FOR_LISTING" = "Các Yêu Cầu về Danh Sách";
 "RESTART_SPRINGBOARD" = "Khởi Động Lại SpringBoard";
 "RESUBMIT_FORM" = "Bạn có chắc muốn gửi lại mẫu đơn này?";
 "RESUMING_AT" = "Tiếp Tục Tại";
-"RETURN_TO_CYDIA" = "Trở lại Cydia";
-"ROLE_EX" = "Không phải tất cả các gói khả dụng qua Cydia đều được thiết kế dành cho tất cả người dùng sử dụng. Vui lòng tự phân loại để Cydia có thể áp dụng các bộ lọc hữu ích.\n\nCó thể thay đổi lựa chọn này từ \"Thiết Lập\" ở tab \"Quản Lý\" (trên iPhone hoặc iPod touch), hoặc tab \"Các Nguồn\" (trên iPad).";
+"RETURN_TO_PHALENA" = "Trở lại Phalena";
+"ROLE_EX" = "Không phải tất cả các gói khả dụng qua Phalena đều được thiết kế dành cho tất cả người dùng sử dụng. Vui lòng tự phân loại để Phalena có thể áp dụng các bộ lọc hữu ích.\n\nCó thể thay đổi lựa chọn này từ \"Thiết Lập\" ở tab \"Quản Lý\" (trên iPhone hoặc iPod touch), hoặc tab \"Các Nguồn\" (trên iPad).";
 "RUNNING" = "Đang chạy";
 "SAFE" = "An toàn";
 "SCREENSHOT" = "Hình chụp màn hình";
@@ -164,7 +164,7 @@
 "TEMPORARY_IGNORE" = "Bỏ Qua (Tạm Thời)";
 "THANK_YOU" = "Xin Cảm Ơn";
 "UNABLE_TO_COMPLY" = "Không Thể Tuân Thủ";
-"UNABLE_TO_COMPLY_EX" = "Thao tác này đòi hỏi phải xóa một hoặc nhiều gói cần thiết để tiếp tục vận hành Cydia hoặc iOS. Để tiếp tục và cưỡng ép thực hiện thao tác này bạn sẽ cần phải kích hoạt mục Nâng Cao ở Thiết Lập.";
+"UNABLE_TO_COMPLY_EX" = "Thao tác này đòi hỏi phải xóa một hoặc nhiều gói cần thiết để tiếp tục vận hành Phalena hoặc iOS. Để tiếp tục và cưỡng ép thực hiện thao tác này bạn sẽ cần phải kích hoạt mục Nâng Cao ở Thiết Lập.";
 "UNABLE_TO_LOAD" = "Không Thể Tải";
 "UNKNOWN" = "Chưa biết";
 "UNSAFE" = "Không an toàn";
@@ -180,6 +180,6 @@
 "VERIFYING_URL" = "Đang xác thực URL";
 "VERSION" = "Phiên bản";
 "WARNING" = "Cảnh báo";
-"WELCOME_TO_CYDIA" = "Chào mừng bạn đến với Cydia™";
+"WELCOME_TO_PHALENA" = "Chào mừng bạn đến với Phalena™";
 "WHO_ARE_YOU" = "Bạn Là Ai?";
 "YES" = "Có";

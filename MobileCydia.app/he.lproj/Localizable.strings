@@ -1,5 +1,5 @@
 "ABOUT" = "אודות";
-"ABOUT_CYDIA" = "אודות מתקין Cydia";
+"ABOUT_PHALENA" = "אודות מתקין Phalena";
 "ACCEPT_NEW_COPY" = "קבל את הגרסה החדשה";
 "ADD" = "הוסף";
 "ADD_ANYWAY" = "הוסף בכל מקרה";
@@ -22,7 +22,7 @@
 "CLEAN_ARCHIVES" = "נקה ארכיונים";
 "CLEAR" = "נקה";
 "CLOSE" = "סגור";
-"CLOSE_CYDIA" = "סגור את Cydia";
+"CLOSE_PHALENA" = "סגור את Phalena";
 "COLON_DELIMITED" = "%@: %@";
 "COMMA_DELIMITED" = "%@, %@";
 "COMPLETE" = "השלם";
@@ -45,13 +45,13 @@
 "DOWNLOADING_" = "מוריד את %@";
 "EDIT" = "ערוך";
 "ELISION" = "%@...";
-"ENTER_APT_URL" = "הזן כתובת URL של Cydia/APT";
+"ENTER_APT_URL" = "הזן כתובת URL של Phalena/APT";
 "ERROR" = "שגיאה";
 "ESSENTIAL_UPGRADE" = "שדרוג חיוני";
 "ESSENTIAL_UPGRADES" = "%d שדרוגים חיוניים";
 "ESSENTIAL_UPGRADE_EX" = "פג תוקפן של אחת או יותר חבילות חיוניות. אם שדרוגים אלו לא יבוצעו, אתה עשוי להיתקל בשגיאות.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Cydia יצא עם השלמת הפעולה).";
+"EXIT_WHEN_COMPLETE" = "(Phalena יצא עם השלמת הפעולה).";
 "EXPERT" = "מומחה";
 "FILES" = "קבצים";
 "FILESYSTEM_CONTENT" = "תוכן מערכת קבצים";
@@ -127,15 +127,15 @@
 "RELOAD_SPRINGBOARD" = "טען מחדש את SpringBoard";
 "REMOVE" = "הסר";
 "REMOVING_ESSENTIALS" = "מסיר את Essentials";
-"REMOVING_ESSENTIALS_EX" = "פעולה זו כרוכה בהסרה של אחת או יותר חבילות שדרושות להמשך הפעולה של Cydia או של iOS. אם תמשיך, ייתכן שלא תוכל להשתמש ב-Cydia לתיקון פגמים.";
+"REMOVING_ESSENTIALS_EX" = "פעולה זו כרוכה בהסרה של אחת או יותר חבילות שדרושות להמשך הפעולה של Phalena או של iOS. אם תמשיך, ייתכן שלא תוכל להשתמש ב-Phalena לתיקון פגמים.";
 "REPAIRING" = "מתקן";
 "REQUEST_ADVERTISING_SPACE" = "בקש שטח פרסום";
 "REQUIREMENTS_FOR_LISTING" = "דרישות לרישום";
 "RESTART_SPRINGBOARD" = "הפעל מחדש את SpringBoard";
 "RESUBMIT_FORM" = "האם אתה בטוח שברצונך לשלוח שוב את הטופס הזה?";
 "RESUMING_AT" = "מחדש פעילות ב-";
-"RETURN_TO_CYDIA" = "חזור אל Cydia";
-"ROLE_EX" = "לא כל החבילות שזמינות דרך Cydia מתוכננות לשימוש של כל המשתמשים. תסווג את עצמך כך ש-Cydia תוכל להחיל מסננים שימושיים.\n\nניתן לשנות בחירה זו דרך \"הגדרות\", תחת הכרטיסייה \"ניהול\" (ב-iPhone או iPod touch),או דרך הכרטיסייה \"מקורות\" (ב-iPad).";
+"RETURN_TO_PHALENA" = "חזור אל Phalena";
+"ROLE_EX" = "לא כל החבילות שזמינות דרך Phalena מתוכננות לשימוש של כל המשתמשים. תסווג את עצמך כך ש-Phalena תוכל להחיל מסננים שימושיים.\n\nניתן לשנות בחירה זו דרך \"הגדרות\", תחת הכרטיסייה \"ניהול\" (ב-iPhone או iPod touch),או דרך הכרטיסייה \"מקורות\" (ב-iPad).";
 "RUNNING" = "פועל";
 "SAFE" = "בטוח";
 "SCREENSHOT" = "צילום מסך";
@@ -164,7 +164,7 @@
 "TEMPORARY_IGNORE" = "התעלם (באופן זמני)";
 "THANK_YOU" = "תודה";
 "UNABLE_TO_COMPLY" = "אין אפשרות לציית";
-"UNABLE_TO_COMPLY_EX" = "פעולה זו דורשת את ההסרה של אחת או יותר חבילות שדרושות להמשך פעולה של Cydia או של iOS. כדי להמשיך, ולאלץ אץ הפעולה הזו, תצטרך להפעיל את האפשרות 'מתקדם' תחת 'הגדרות'.";
+"UNABLE_TO_COMPLY_EX" = "פעולה זו דורשת את ההסרה של אחת או יותר חבילות שדרושות להמשך פעולה של Phalena או של iOS. כדי להמשיך, ולאלץ אץ הפעולה הזו, תצטרך להפעיל את האפשרות 'מתקדם' תחת 'הגדרות'.";
 "UNABLE_TO_LOAD" = "אי אפשר לטעון";
 "UNKNOWN" = "לא מוכר";
 "UNSAFE" = "לא בטוח";
@@ -180,6 +180,6 @@
 "VERIFYING_URL" = "מאמת כתובת URL";
 "VERSION" = "גרסה";
 "WARNING" = "אזהרה";
-"WELCOME_TO_CYDIA" = "ברוך הבא אל Cydia™";
+"WELCOME_TO_PHALENA" = "ברוך הבא אל Phalena™";
 "WHO_ARE_YOU" = "מי אתה?";
 "YES" = "כן";

@@ -1,5 +1,5 @@
 "ABOUT" = "Over";
-"ABOUT_CYDIA" = "Over Cydia Installer";
+"ABOUT_PHALENA" = "Over Phalena Installer";
 "ACCEPT_NEW_COPY" = "Accepteer nieuwe versie";
 "ADD" = "Voeg toe";
 "ADD_ANYWAY" = "Voeg alsnog toe";
@@ -25,7 +25,7 @@
 "CLEAN_ARCHIVES" = "Verwijder archieven";
 "CLEAR" = "Wis";
 "CLOSE" = "Sluit";
-"CLOSE_CYDIA" = "Sluit Cydia";
+"CLOSE_PHALENA" = "Sluit Phalena";
 "COLON_DELIMITED" = "%@: %@";
 "COMING_SOON" = "Binnenkort!";
 "COMMA_DELIMITED" = "%@, %@";
@@ -40,7 +40,7 @@
 "CONTINUE_QUEUING" = "Verder met wachtrij";
 "COUNTS_NONZERO_EX" = "Ik heb dus even een rekensommetje van belangrijke waarden gemaakt, en de uitkomst was niet nul. Vreemd... Ik weet niet hoe dit komt maar het had niet zo mogen zijn.";
 "CREDITS" = "Credits";
-"CYDIA_STORE" = "Cydia Store";
+"PHALENA_STORE" = "Phalena Store";
 "DATABASE" = "Database";
 "DETAILS" = "Details";
 "DEVELOPER" = "Ontwikkelaar";
@@ -57,13 +57,13 @@
 "EDIT" = "Wijzig";
 "ELISION" = "%@...";
 "ENTERED_BY_USER" = "Door gebruiker ingevoerd";
-"ENTER_APT_URL" = "Voer Cydia/APT URL in";
+"ENTER_APT_URL" = "Voer Phalena/APT URL in";
 "ERROR" = "Fout";
 "ESSENTIAL_UPGRADE" = "Essentiële upgrade";
 "ESSENTIAL_UPGRADES" = "%d essentiële upgrades";
 "ESSENTIAL_UPGRADE_EX" = "Een of meerdere essentiële pakketten zijn verouderd. Als u deze upgrades niet doorvoert, verhoogt u de kans op problemen.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Cydia zal zichzelf hierna afsluiten.)";
+"EXIT_WHEN_COMPLETE" = "(Phalena zal zichzelf hierna afsluiten.)";
 "EXPANDED_SIZE" = "Grootte op schijf";
 "EXPERT" = "Expert";
 "FAQ" = "FAQ";
@@ -155,7 +155,7 @@
 "RELOAD_SPRINGBOARD" = "Laad SpringBoard opnieuw";
 "REMOVE" = "Verwijder";
 "REMOVING_ESSENTIALS" = "Essentiële pakketten verwijderen";
-"REMOVING_ESSENTIALS_EX" = "Deze actie omvat het verwijderen van een of meerdere pakketten die noodzakelijk zijn voor het correct functioneren van Cydia of iOS. Doorgaan kan schade veroorzaken die niet met Cydia verholpen kan worden.";
+"REMOVING_ESSENTIALS_EX" = "Deze actie omvat het verwijderen van een of meerdere pakketten die noodzakelijk zijn voor het correct functioneren van Phalena of iOS. Doorgaan kan schade veroorzaken die niet met Phalena verholpen kan worden.";
 "REPAIRING" = "Herstellen";
 "REPOSITORY_SIGNATURE" = "Bekijk handtekening van repository";
 "REQUEST_ADVERTISING_SPACE" = "Vraag advertentieruimte aan";
@@ -163,8 +163,8 @@
 "RESTART_SPRINGBOARD" = "Herstart SpringBoard";
 "RESUBMIT_FORM" = "Weet u zeker dat u dit formulier opnieuw wilt verzenden?";
 "RESUMING_AT" = "Hervatten vanaf";
-"RETURN_TO_CYDIA" = "Terug naar Cydia";
-"ROLE_EX" = "Niet alle pakketten die in Cydia worden aangeboden zijn geschikt voor iedere gebruiker. Kies een categorie die bij u past zodat Cydia handige filters kan toepassen.\n\nU kunt uw keuze op elk later tijdstip aanpassen via Instellingen onder het tabblad 'Beheer' (op iPhone of iPod touch) of onder het tabblad 'Bronnen' (op iPad).";
+"RETURN_TO_PHALENA" = "Terug naar Phalena";
+"ROLE_EX" = "Niet alle pakketten die in Phalena worden aangeboden zijn geschikt voor iedere gebruiker. Kies een categorie die bij u past zodat Phalena handige filters kan toepassen.\n\nU kunt uw keuze op elk later tijdstip aanpassen via Instellingen onder het tabblad 'Beheer' (op iPhone of iPod touch) of onder het tabblad 'Bronnen' (op iPad).";
 "RUNNING" = "Bezig";
 "SAFE" = "Veilig";
 "SAMPLE" = "Voorbeeld";
@@ -198,7 +198,7 @@
 "TEMPORARY_IGNORE" = "Negeer (tijdelijk)";
 "THANK_YOU" = "Bedankt";
 "UNABLE_TO_COMPLY" = "Wijzigen niet mogelijk";
-"UNABLE_TO_COMPLY_EX" = "De gevraagde wijzigingen kunnen niet worden doorgevoerd omdat ze het verwijderen van een of meerdere pakketten vereisen die noodzakelijk zijn voor het correct functioneren van Cydia of iOS. Indien u deze wijzigingen alsnog wilt doorvoeren schakelt u 'Geavanceerd' in bij Instellingen.";
+"UNABLE_TO_COMPLY_EX" = "De gevraagde wijzigingen kunnen niet worden doorgevoerd omdat ze het verwijderen van een of meerdere pakketten vereisen die noodzakelijk zijn voor het correct functioneren van Phalena of iOS. Indien u deze wijzigingen alsnog wilt doorvoeren schakelt u 'Geavanceerd' in bij Instellingen.";
 "UNABLE_TO_LOAD" = "Laden niet mogelijk";
 "UNKNOWN" = "Onbekend";
 "UNSAFE" = "Onveilig";
@@ -215,6 +215,6 @@
 "VERIFYING_URL" = "URL verifiëren";
 "VERSION" = "Versie";
 "WARNING" = "Waarschuwing";
-"WELCOME_TO_CYDIA" = "Welkom bij Cydia™";
+"WELCOME_TO_PHALENA" = "Welkom bij Phalena™";
 "WHO_ARE_YOU" = "Wie bent u?";
 "YES" = "Ja";

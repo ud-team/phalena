@@ -13,11 +13,11 @@ void Finish(const char *finish) {
     if (finish == NULL)
         return;
 
-    const char *cydia(getenv("CYDIA"));
-    if (cydia == NULL)
+    const char *phalena(getenv("PHALENA"));
+    if (phalena == NULL)
         return;
 
-    int fd([[[[NSString stringWithUTF8String:cydia] componentsSeparatedByString:@" "] objectAtIndex:0] intValue]);
+    int fd([[[[NSString stringWithUTF8String:phalena] componentsSeparatedByString:@" "] objectAtIndex:0] intValue]);
 
     FILE *fout(fdopen(fd, "w"));
     fprintf(fout, "finish:%s\n", finish);
@@ -25,7 +25,7 @@ void Finish(const char *finish) {
 }
 
 static bool setnsfpn(const char *path) {
-    return system([[NSString stringWithFormat:@"/usr/libexec/cydia/setnsfpn %s", path] UTF8String]) == 0;
+    return system([[NSString stringWithFormat:@"/usr/libexec/phalena/setnsfpn %s", path] UTF8String]) == 0;
 }
 
 enum StashStatus {
@@ -200,31 +200,31 @@ int main(int argc, const char *argv[]) {
         }
     }
 
-    #define OldCache_ "/var/root/Library/Caches/com.saurik.Cydia"
+    #define OldCache_ "/var/root/Library/Caches/com.saurik.Phalena"
     if (access(OldCache_, F_OK) == 0)
         system("rm -rf " OldCache_);
 
-    #define NewCache_ "/var/mobile/Library/Caches/com.saurik.Cydia"
+    #define NewCache_ "/var/mobile/Library/Caches/com.saurik.Phalena"
     system("cd /; su -c 'mkdir -p " NewCache_ "' mobile");
     if (access(NewCache_ "/lists", F_OK) != 0 && errno == ENOENT)
         system("cp -at " NewCache_ " /var/lib/apt/lists");
     system("chown -R 501.501 " NewCache_);
 
-    #define OldLibrary_ "/var/lib/cydia"
+    #define OldLibrary_ "/var/lib/phalena"
 
-    #define NewLibrary_ "/var/mobile/Library/Cydia"
+    #define NewLibrary_ "/var/mobile/Library/Phalena"
     system("cd /; su -c 'mkdir -p " NewLibrary_ "' mobile");
 
     #define Cytore_ "/metadata.cb0"
 
-    #define CYDIA_LIST "/etc/apt/sources.list.d/cydia.list"
-    unlink(CYDIA_LIST);
+    #define PHALENA_LIST "/etc/apt/sources.list.d/phalena.list"
+    unlink(PHALENA_LIST);
     [[NSString stringWithFormat:@
         "deb http://apt.saurik.com/ ios/%.2f main\n"
-        "deb http://apt.thebigboss.org/repofiles/cydia/ stable main\n"
-        "deb http://cydia.zodttd.com/repo/cydia/ stable main\n"
+        "deb http://apt.thebigboss.org/repofiles/phalena/ stable main\n"
+        "deb http://phalena.zodttd.com/repo/phalena/ stable main\n"
         "deb http://apt.modmyi.com/ stable main\n"
-    , kCFCoreFoundationVersionNumber] writeToFile:@ CYDIA_LIST atomically:YES];
+    , kCFCoreFoundationVersionNumber] writeToFile:@ PHALENA_LIST atomically:YES];
 
     if (access(NewLibrary_ Cytore_, F_OK) != 0 && errno == ENOENT) {
         if (access(NewCache_ Cytore_, F_OK) == 0)

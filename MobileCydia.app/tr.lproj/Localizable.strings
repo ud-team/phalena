@@ -1,5 +1,5 @@
 "ABOUT" = "Hakkında";
-"ABOUT_CYDIA" = "Cydia Yükleyicisi Hakkında";
+"ABOUT_PHALENA" = "Phalena Yükleyicisi Hakkında";
 "ACCEPT_NEW_COPY" = "Yeni Sürümü Kabul Et";
 "ADD" = "Ekle";
 "ADD_ANYWAY" = "Yine de Ekle";
@@ -22,7 +22,7 @@
 "CLEAN_ARCHIVES" = "Arşivleri Temizle";
 "CLEAR" = "Temizle";
 "CLOSE" = "Kapat";
-"CLOSE_CYDIA" = "Cydia'yı Kapat";
+"CLOSE_PHALENA" = "Phalena'yı Kapat";
 "COLON_DELIMITED" = "%@: %@";
 "COMMA_DELIMITED" = "%@, %@";
 "COMPLETE" = "Tamamlandı";
@@ -45,13 +45,13 @@
 "DOWNLOADING_" = "%@ indiriliyor";
 "EDIT" = "Düzenle";
 "ELISION" = "%@...";
-"ENTER_APT_URL" = "Cydia/APT URL'sini Girin";
+"ENTER_APT_URL" = "Phalena/APT URL'sini Girin";
 "ERROR" = "Hata";
 "ESSENTIAL_UPGRADE" = "Gerekli Güncelleme";
 "ESSENTIAL_UPGRADES" = "%d Gerekli Güncelleme";
 "ESSENTIAL_UPGRADE_EX" = "Bir veya daha fazla gerekli paket güncelliğini yitirmiş. Eğer bu güncellemeler yapılmazsa, hatalarla karşılaşabilirsiniz.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Tamamlandığında Cydia kapanacak.)";
+"EXIT_WHEN_COMPLETE" = "(Tamamlandığında Phalena kapanacak.)";
 "EXPERT" = "Uzman";
 "FILES" = "Dosyalar";
 "FILESYSTEM_CONTENT" = "Dosya Sistemi İçeriği";
@@ -127,15 +127,15 @@
 "RELOAD_SPRINGBOARD" = "SpringBoard'u Yeniden Yükle";
 "REMOVE" = "Kaldır";
 "REMOVING_ESSENTIALS" = "Gerekli Paketler Kaldırılıyor";
-"REMOVING_ESSENTIALS_EX" = "Bu işlem, Cydia veya iOS'un çalışmaya devam etmesi için gerekli olan bir veya daha fazla paketin kaldırılmasını içeriyor. Eğer devam ederseniz, oluşacak hasarları onarmak için Cydia'yı kullanmanız mümkün olmayabilir.";
+"REMOVING_ESSENTIALS_EX" = "Bu işlem, Phalena veya iOS'un çalışmaya devam etmesi için gerekli olan bir veya daha fazla paketin kaldırılmasını içeriyor. Eğer devam ederseniz, oluşacak hasarları onarmak için Phalena'yı kullanmanız mümkün olmayabilir.";
 "REPAIRING" = "Onarılıyor";
 "REQUEST_ADVERTISING_SPACE" = "Reklam Alanı İste";
 "REQUIREMENTS_FOR_LISTING" = "Listeleme Gereksinimleri";
 "RESTART_SPRINGBOARD" = "SpringBoard'u Yeniden Başlat";
 "RESUBMIT_FORM" = "Bu formu yeniden göndermek istediğinizden emin misiniz?";
 "RESUMING_AT" = "Devam Ediliyor";
-"RETURN_TO_CYDIA" = "Cydia'ya Geri Dön";
-"ROLE_EX" = "Cydia'da sunulan tüm paketler her kullanıcıya hitap etmeyebilir. Cydia'nın yardımcı olabilecek filtreler uygulayabilmesi için lütfen kategorinizi belirleyin.\n\nBu seçenek, (iPhone veya iPod touch'ta) \"Yönetim\" sekmesindeki \"Ayarlar\" bölümünden veya (iPad'de) \"Kaynaklar\" sekmesinden değiştirilebilir.";
+"RETURN_TO_PHALENA" = "Phalena'ya Geri Dön";
+"ROLE_EX" = "Phalena'da sunulan tüm paketler her kullanıcıya hitap etmeyebilir. Phalena'nın yardımcı olabilecek filtreler uygulayabilmesi için lütfen kategorinizi belirleyin.\n\nBu seçenek, (iPhone veya iPod touch'ta) \"Yönetim\" sekmesindeki \"Ayarlar\" bölümünden veya (iPad'de) \"Kaynaklar\" sekmesinden değiştirilebilir.";
 "RUNNING" = "Çalışıyor";
 "SAFE" = "Güvenli";
 "SCREENSHOT" = "Ekran Görüntüsü";
@@ -164,7 +164,7 @@
 "TEMPORARY_IGNORE" = "Yoksay (Geçici)";
 "THANK_YOU" = "Teşekkürler";
 "UNABLE_TO_COMPLY" = "İşlem Yapılamıyor";
-"UNABLE_TO_COMPLY_EX" = "Bu işlem, Cydia veya iOS'un çalışmaya devam etmesi için gerekli olan bir veya daha fazla paketin kaldırılmasını gerektiriyor. Bu işleme zorla devam etmek için Ayarlar bölümünden Gelişmiş seçeneğini etkinleştirmelisiniz.  ";
+"UNABLE_TO_COMPLY_EX" = "Bu işlem, Phalena veya iOS'un çalışmaya devam etmesi için gerekli olan bir veya daha fazla paketin kaldırılmasını gerektiriyor. Bu işleme zorla devam etmek için Ayarlar bölümünden Gelişmiş seçeneğini etkinleştirmelisiniz.  ";
 "UNABLE_TO_LOAD" = "Yüklenemiyor";
 "UNKNOWN" = "Bilinmiyor";
 "UNSAFE" = "Güvensiz";
@@ -180,6 +180,6 @@
 "VERIFYING_URL" = "URL Doğrulanıyor";
 "VERSION" = "Sürüm";
 "WARNING" = "Uyarı";
-"WELCOME_TO_CYDIA" = "Cydia™'ya Hoş Geldiniz";
+"WELCOME_TO_PHALENA" = "Phalena™'ya Hoş Geldiniz";
 "WHO_ARE_YOU" = "Siz Kimsiniz?";
 "YES" = "Evet";

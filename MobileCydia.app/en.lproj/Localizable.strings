@@ -1,5 +1,5 @@
 "ABOUT" = "About";
-"ABOUT_CYDIA" = "About Cydia Installer";
+"ABOUT_PHALENA" = "About Phalena Installer";
 "ACCEPT_NEW_COPY" = "Accept The New Copy";
 "ADD" = "Add";
 "ADD_ANYWAY" = "Add Anyway";
@@ -25,7 +25,7 @@
 "CLEAN_ARCHIVES" = "Clean Archives";
 "CLEAR" = "Clear";
 "CLOSE" = "Close";
-"CLOSE_CYDIA" = "Close Cydia";
+"CLOSE_PHALENA" = "Close Phalena";
 "COLON_DELIMITED" = "%@: %@";
 "COMING_SOON" = "Coming Soon!";
 "COMMA_DELIMITED" = "%@, %@";
@@ -40,7 +40,7 @@
 "CONTINUE_QUEUING" = "Continue Queuing";
 "COUNTS_NONZERO_EX" = "So, I just counted some important-looking values, and they didn't sum to zero. This is scary. I don't know why I don't like this anymore, but I think APT was adamant this should not occur.";
 "CREDITS" = "Credits";
-"CYDIA_STORE" = "Cydia Store";
+"PHALENA_STORE" = "Phalena Store";
 "DATABASE" = "Database";
 "DETAILS" = "Details";
 "DEVELOPER" = "Developer";
@@ -57,13 +57,13 @@
 "EDIT" = "Edit";
 "ELISION" = "%@...";
 "ENTERED_BY_USER" = "Entered by User";
-"ENTER_APT_URL" = "Enter Cydia/APT URL";
+"ENTER_APT_URL" = "Enter Phalena/APT URL";
 "ERROR" = "Error";
 "ESSENTIAL_UPGRADE" = "Essential Upgrade";
 "ESSENTIAL_UPGRADES" = "%d Essential Upgrades";
 "ESSENTIAL_UPGRADE_EX" = "One or more essential packages are currently out of date. If these upgrades are not performed you are likely to encounter errors.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Cydia will exit when complete.)";
+"EXIT_WHEN_COMPLETE" = "(Phalena will exit when complete.)";
 "EXPANDED_SIZE" = "Expanded Size";
 "EXPERT" = "Expert";
 "FAQ" = "FAQ";
@@ -155,7 +155,7 @@
 "RELOAD_SPRINGBOARD" = "Reload SpringBoard";
 "REMOVE" = "Remove";
 "REMOVING_ESSENTIALS" = "Removing Essentials";
-"REMOVING_ESSENTIALS_EX" = "This operation involves the removal of one or more packages that are required for the continued operation of either Cydia or iOS. If you continue, you may not be able to use Cydia to repair any damage.";
+"REMOVING_ESSENTIALS_EX" = "This operation involves the removal of one or more packages that are required for the continued operation of either Phalena or iOS. If you continue, you may not be able to use Phalena to repair any damage.";
 "REPAIRING" = "Repairing";
 "REPOSITORY_SIGNATURE" = "View Repository Signature";
 "REQUEST_ADVERTISING_SPACE" = "Request Advertising Space";
@@ -163,8 +163,8 @@
 "RESTART_SPRINGBOARD" = "Restart SpringBoard";
 "RESUBMIT_FORM" = "Are you sure you want to submit this form again?";
 "RESUMING_AT" = "Resuming At";
-"RETURN_TO_CYDIA" = "Return to Cydia";
-"ROLE_EX" = "Not all of the packages available via Cydia are designed to be used by all users. Please categorize yourself so that Cydia can apply helpful filters.\n\nThis choice can be changed from \"Settings\" under the \"Manage\" tab (on iPhone or iPod touch), or the \"Sources\" tab (on iPad).";
+"RETURN_TO_PHALENA" = "Return to Phalena";
+"ROLE_EX" = "Not all of the packages available via Phalena are designed to be used by all users. Please categorize yourself so that Phalena can apply helpful filters.\n\nThis choice can be changed from \"Settings\" under the \"Manage\" tab (on iPhone or iPod touch), or the \"Sources\" tab (on iPad).";
 "RUNNING" = "Running";
 "SAFE" = "Safe";
 "SAMPLE" = "Sample";
@@ -198,7 +198,7 @@
 "TEMPORARY_IGNORE" = "Ignore (Temporary)";
 "THANK_YOU" = "Thank You";
 "UNABLE_TO_COMPLY" = "Unable to Comply";
-"UNABLE_TO_COMPLY_EX" = "This operation requires the removal of one or more packages that are required for the continued operation of either Cydia or iOS. In order to continue and force this operation you will need to be activate the Advanced under Settings.";
+"UNABLE_TO_COMPLY_EX" = "This operation requires the removal of one or more packages that are required for the continued operation of either Phalena or iOS. In order to continue and force this operation you will need to be activate the Advanced under Settings.";
 "UNABLE_TO_LOAD" = "Unable to Load";
 "UNKNOWN" = "Unknown";
 "UNSAFE" = "Unsafe";
@@ -215,6 +215,6 @@
 "VERIFYING_URL" = "Verifying URL";
 "VERSION" = "Version";
 "WARNING" = "Warning";
-"WELCOME_TO_CYDIA" = "Welcome to Cydia™";
+"WELCOME_TO_PHALENA" = "Welcome to Phalena™";
 "WHO_ARE_YOU" = "Who Are You?";
 "YES" = "Yes";

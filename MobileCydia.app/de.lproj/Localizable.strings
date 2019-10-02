@@ -1,5 +1,5 @@
 "ABOUT" = "Über";
-"ABOUT_CYDIA" = "Über Cydia Installer";
+"ABOUT_PHALENA" = "Über Phalena Installer";
 "ACCEPT_NEW_COPY" = "Neue Version verwenden";
 "ADD" = "Hinzufügen";
 "ADD_ANYWAY" = "Trotzdem hinzufügen";
@@ -25,7 +25,7 @@
 "CLEAN_ARCHIVES" = "Archive aufräumen";
 "CLEAR" = "Leeren";
 "CLOSE" = "Schließen";
-"CLOSE_CYDIA" = "Cydia schließen";
+"CLOSE_PHALENA" = "Phalena schließen";
 "COLON_DELIMITED" = "%@: %@";
 "COMING_SOON" = "Bald verfügbar!";
 "COMMA_DELIMITED" = "%@, %@";
@@ -40,7 +40,7 @@
 "CONTINUE_QUEUING" = "Weiter auswählen";
 "COUNTS_NONZERO_EX" = "So, ich habe gerade ein paar wichtig scheinende Werte gezählt, und ihre Summe war nicht null. Das ist beängstigend. Ich weiß nicht mehr, warum ich das nicht mag, aber ich denke APT bestand darauf, dass das nicht passieren darf.";
 "CREDITS" = "Credits";
-"CYDIA_STORE" = "Cydia Store";
+"PHALENA_STORE" = "Phalena Store";
 "DATABASE" = "Datenbank";
 "DETAILS" = "Details";
 "DEVELOPER" = "Entwickler";
@@ -57,13 +57,13 @@
 "EDIT" = "Bearbeiten";
 "ELISION" = "%@ ...";
 "ENTERED_BY_USER" = "Vom Benutzer eingegeben";
-"ENTER_APT_URL" = "Cydia/APT URL eingeben";
+"ENTER_APT_URL" = "Phalena/APT URL eingeben";
 "ERROR" = "Fehler";
 "ESSENTIAL_UPGRADE" = "Wichtige Aktualisierung";
 "ESSENTIAL_UPGRADES" = "%d wichtige Aktualisierungen";
 "ESSENTIAL_UPGRADE_EX" = "Ein oder mehrere wichtige Pakete sind veraltet. Um Fehler zu vermeiden, sollten die Aktualisierungen installiert werden.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Cydia wird danach beendet.)";
+"EXIT_WHEN_COMPLETE" = "(Phalena wird danach beendet.)";
 "EXPANDED_SIZE" = "Entpackte Größe";
 "EXPERT" = "Experte";
 "FAQ" = "FAQ";
@@ -155,7 +155,7 @@
 "RELOAD_SPRINGBOARD" = "SpringBoard neu laden";
 "REMOVE" = "Entfernen";
 "REMOVING_ESSENTIALS" = "Grundlegende Pakete löschen";
-"REMOVING_ESSENTIALS_EX" = "Diese Aktion erfordert das Löschen eines oder mehrerer Pakete, die notwendig für die Funktionalität von Cydia oder iOS sind. Wenn Sie fortsetzen, können Sie ggf. Cydia nicht mehr benutzen, um den Schaden zu beheben.";
+"REMOVING_ESSENTIALS_EX" = "Diese Aktion erfordert das Löschen eines oder mehrerer Pakete, die notwendig für die Funktionalität von Phalena oder iOS sind. Wenn Sie fortsetzen, können Sie ggf. Phalena nicht mehr benutzen, um den Schaden zu beheben.";
 "REPAIRING" = "Wird repariert";
 "REPOSITORY_SIGNATURE" = "Quellen-Signatur anzeigen";
 "REQUEST_ADVERTISING_SPACE" = "Werbefläche beantragen";
@@ -163,8 +163,8 @@
 "RESTART_SPRINGBOARD" = "SpringBoard neu starten";
 "RESUBMIT_FORM" = "Sind Sie sicher, dass Sie das Formular erneut senden möchten?";
 "RESUMING_AT" = "Wiederaufnahme bei";
-"RETURN_TO_CYDIA" = "Zurück zu Cydia";
-"ROLE_EX" = "Nicht alle über Cydia erhältlichen Pakete sind für alle Benutzer gedacht. Bitte stufen Sie sich ein, sodass Cydia hilfreiche Filter anwenden kann.\n\nDiese Einstellung kann in den „Einstellungen“ unter „Verwalten“ (auf iPhone oder iPod touch) oder unter „Quellen“ (auf iPad) geändert werden.";
+"RETURN_TO_PHALENA" = "Zurück zu Phalena";
+"ROLE_EX" = "Nicht alle über Phalena erhältlichen Pakete sind für alle Benutzer gedacht. Bitte stufen Sie sich ein, sodass Phalena hilfreiche Filter anwenden kann.\n\nDiese Einstellung kann in den „Einstellungen“ unter „Verwalten“ (auf iPhone oder iPod touch) oder unter „Quellen“ (auf iPad) geändert werden.";
 "RUNNING" = "Aktiv";
 "SAFE" = "Sicher";
 "SAMPLE" = "Beispiel";
@@ -198,7 +198,7 @@
 "TEMPORARY_IGNORE" = "Ignorieren (temporär)";
 "THANK_YOU" = "Danke";
 "UNABLE_TO_COMPLY" = "Operation nicht möglich";
-"UNABLE_TO_COMPLY_EX" = "Diese Aktion erfordert das Löschen eines oder mehrerer Pakete, die notwendig für die Funktionalität von Cydia oder iOS sind. Um fortzufahren und diese Aktion zu erzwingen, muss der Fortgeschrittenen-Modus in den Einstellungen aktiviert sein.";
+"UNABLE_TO_COMPLY_EX" = "Diese Aktion erfordert das Löschen eines oder mehrerer Pakete, die notwendig für die Funktionalität von Phalena oder iOS sind. Um fortzufahren und diese Aktion zu erzwingen, muss der Fortgeschrittenen-Modus in den Einstellungen aktiviert sein.";
 "UNABLE_TO_LOAD" = "Laden nicht möglich";
 "UNKNOWN" = "Unbekannt";
 "UNSAFE" = "Unsicher";
@@ -215,6 +215,6 @@
 "VERIFYING_URL" = "URL wird überprüft";
 "VERSION" = "Version";
 "WARNING" = "Warnung";
-"WELCOME_TO_CYDIA" = "Willkommen bei Cydia™";
+"WELCOME_TO_PHALENA" = "Willkommen bei Phalena™";
 "WHO_ARE_YOU" = "Wer sind Sie?";
 "YES" = "Ja";

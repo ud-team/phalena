@@ -37,17 +37,17 @@ static Class $MFMailComposeViewController;
 
 float CYScrollViewDecelerationRateNormal;
 
-@interface WebFrame (Cydia)
-- (void) cydia$updateHeight;
+@interface WebFrame (Phalena)
+- (void) phalena$updateHeight;
 @end
 
-@implementation WebFrame (Cydia)
+@implementation WebFrame (Phalena)
 
 - (NSString *) description {
     return [NSString stringWithFormat:@"<%s: %p, %@>", class_getName([self class]), self, [[[([self provisionalDataSource] ?: [self dataSource]) request] URL] absoluteString]];
 }
 
-- (void) cydia$updateHeight {
+- (void) phalena$updateHeight {
     [[[self frameElement] style]
         setProperty:@"height"
         value:[NSString stringWithFormat:@"%dpx",
@@ -356,7 +356,7 @@ static _H<NSMutableSet> Diversions_;
     [super reloadData];
 
     if (ready_)
-        [self dispatchEvent:@"CydiaReloadData"];
+        [self dispatchEvent:@"PhalenaReloadData"];
     else
         [self reloadURLWithCache:YES];
 }
@@ -1324,17 +1324,17 @@ static _H<NSString> UserAgent_;
     // XXX: why isn't this evern called automatically?
     [[self webView] setNeedsLayout];
 
-    [self dispatchEvent:@"CydiaViewWillAppear"];
+    [self dispatchEvent:@"PhalenaViewWillAppear"];
     [super viewWillAppear:animated];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self dispatchEvent:@"CydiaViewDidAppear"];
+    [self dispatchEvent:@"PhalenaViewDidAppear"];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-    [self dispatchEvent:@"CydiaViewWillDisappear"];
+    [self dispatchEvent:@"PhalenaViewWillDisappear"];
     [super viewWillDisappear:animated];
 
     if ([self hidesNavigationBar])
@@ -1345,12 +1345,12 @@ static _H<NSString> UserAgent_;
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [self dispatchEvent:@"CydiaViewDidDisappear"];
+    [self dispatchEvent:@"PhalenaViewDidDisappear"];
 }
 
 - (void) updateHeights:(NSTimer *)timer {
     for (WebFrame *frame in (id) registered_)
-        [frame cydia$updateHeight];
+        [frame phalena$updateHeight];
 }
 
 - (void) registerFrame:(WebFrame *)frame {

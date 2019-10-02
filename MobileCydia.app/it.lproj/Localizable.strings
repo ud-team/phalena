@@ -1,5 +1,5 @@
 "ABOUT" = "Info";
-"ABOUT_CYDIA" = "Info su Cydia";
+"ABOUT_PHALENA" = "Info su Phalena";
 "ACCEPT_NEW_COPY" = "Accetta la nuova copia";
 "ADD" = "Aggiungi";
 "ADD_ANYWAY" = "Aggiungi lo stesso";
@@ -25,7 +25,7 @@
 "CLEAN_ARCHIVES" = "Pulizia archivi";
 "CLEAR" = "Pulisci";
 "CLOSE" = "Chiudi";
-"CLOSE_CYDIA" = "Chiudi Cydia";
+"CLOSE_PHALENA" = "Chiudi Phalena";
 "COLON_DELIMITED" = "%@: %@";
 "COMING_SOON" = "In arrivo!";
 "COMMA_DELIMITED" = "%@, %@";
@@ -40,7 +40,7 @@
 "CONTINUE_QUEUING" = "Continua a mettere in coda";
 "COUNTS_NONZERO_EX" = "Allora, ho appena controllato dei valori importanti e la loro somma non è zero. Questo è spaventoso. Non so perchè ma non mi piace più, ma penso che l'APT è stato irremovibile, questo non dovrebbe accadere.";
 "CREDITS" = "Crediti";
-"CYDIA_STORE" = "Cydia Store";
+"PHALENA_STORE" = "Phalena Store";
 "DATABASE" = "Database";
 "DETAILS" = "Dettagli";
 "DEVELOPER" = "Sviluppatore";
@@ -57,13 +57,13 @@
 "EDIT" = "Modifica";
 "ELISION" = "%@...";
 "ENTERED_BY_USER" = "Inseriti dall'Utente";
-"ENTER_APT_URL" = "Inserisci URL Cydia/APT";
+"ENTER_APT_URL" = "Inserisci URL Phalena/APT";
 "ERROR" = "Errore";
 "ESSENTIAL_UPGRADE" = "Aggiornamento indispensabile";
 "ESSENTIAL_UPGRADES" = "%d aggiornamenti indispensabili";
 "ESSENTIAL_UPGRADE_EX" = "Uno o più pacchetti indispensabili sono obsoleti. Se questi aggiornamenti non vengono eseguiti, possono verificarsi degli errori.";
 "EXCLAMATION" = "%@!";
-"EXIT_WHEN_COMPLETE" = "(Cydia esce al termine.)";
+"EXIT_WHEN_COMPLETE" = "(Phalena esce al termine.)";
 "EXPANDED_SIZE" = "Expanded Size";
 "EXPERT" = "Esperto";
 "FAQ" = "FAQ";
@@ -155,7 +155,7 @@
 "RELOAD_SPRINGBOARD" = "Ricarica SpringBoard";
 "REMOVE" = "Rimuovi";
 "REMOVING_ESSENTIALS" = "Rimozione pacchetti indispensabili";
-"REMOVING_ESSENTIALS_EX" = "Questa operazione comporta la rimozione di uno o più pacchetti che sono richiesti per il funzionamento di Cydia o iOS. Se si continua, potrebbe essere impossibile utilizzare Cydia per riparare i danni.";
+"REMOVING_ESSENTIALS_EX" = "Questa operazione comporta la rimozione di uno o più pacchetti che sono richiesti per il funzionamento di Phalena o iOS. Se si continua, potrebbe essere impossibile utilizzare Phalena per riparare i danni.";
 "REPAIRING" = "Riparazione in corso";
 "REPOSITORY_SIGNATURE" = "Vedi Firma Repository";
 "REQUEST_ADVERTISING_SPACE" = "Richiedi spazio pubblicitario";
@@ -163,8 +163,8 @@
 "RESTART_SPRINGBOARD" = "Riavvia SpringBoard";
 "RESUBMIT_FORM" = "Inviare nuovamente il modulo?";
 "RESUMING_AT" = "Ripresa da";
-"RETURN_TO_CYDIA" = "Ritorna a Cydia";
-"ROLE_EX" = "Non tutti i pacchetti disponibili tramite Cydia sono progettati per essere utilizzati da tutti gli utenti. Seleziona la categoria di persona che ti si addice di più cosicché Cydia possa applicare i filtri adatti.\n\nLa scelta può essere modificata in \"Impostazioni\" nella scheda \"Gestisci\" (su iPhone o iPod touch) o nella scheda \"Sorgenti\" (su iPad).";
+"RETURN_TO_PHALENA" = "Ritorna a Phalena";
+"ROLE_EX" = "Non tutti i pacchetti disponibili tramite Phalena sono progettati per essere utilizzati da tutti gli utenti. Seleziona la categoria di persona che ti si addice di più cosicché Phalena possa applicare i filtri adatti.\n\nLa scelta può essere modificata in \"Impostazioni\" nella scheda \"Gestisci\" (su iPhone o iPod touch) o nella scheda \"Sorgenti\" (su iPad).";
 "RUNNING" = "Esecuzione in corso";
 "SAFE" = "Sicuro";
 "SAMPLE" = "Esempio";
@@ -198,7 +198,7 @@
 "TEMPORARY_IGNORE" = "Ignora (temporaneamente)";
 "THANK_YOU" = "Grazie";
 "UNABLE_TO_COMPLY" = "Impossibile eseguire";
-"UNABLE_TO_COMPLY_EX" = "Questa operazione richiede la rimozione di uno o più pacchetti che sono richiesti per il funzionamento di Cydia o iOS. Per continuare e forzare l'operazione è necessario attivare Avanzate in Impostazioni.";
+"UNABLE_TO_COMPLY_EX" = "Questa operazione richiede la rimozione di uno o più pacchetti che sono richiesti per il funzionamento di Phalena o iOS. Per continuare e forzare l'operazione è necessario attivare Avanzate in Impostazioni.";
 "UNABLE_TO_LOAD" = "Impossibile caricare";
 "UNKNOWN" = "Sconosciuto";
 "UNSAFE" = "Non sicuro";
@@ -215,6 +215,6 @@
 "VERIFYING_URL" = "Verifica URL in corso";
 "VERSION" = "Versione";
 "WARNING" = "Avvertenza";
-"WELCOME_TO_CYDIA" = "Benvenuto in Cydia™";
+"WELCOME_TO_PHALENA" = "Benvenuto in Phalena™";
 "WHO_ARE_YOU" = "Chi sei?";
 "YES" = "Si";

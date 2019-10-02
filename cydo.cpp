@@ -1,21 +1,21 @@
-/* Cydia - iPhone UIKit Front-End for Debian APT
+/* Phalena - iPhone UIKit Front-End for Debian APT
  * Copyright (C) 2008-2015  Jay Freeman (saurik)
 */
 
 /* GNU General Public License, Version 3 {{{ */
 /*
- * Cydia is free software: you can redistribute it and/or modify
+ * Phalena is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation, either version 3 of the License,
  * or (at your option) any later version.
  *
- * Cydia is distributed in the hope that it will be useful, but
+ * Phalena is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Cydia.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Phalena.  If not, see <http://www.gnu.org/licenses/>.
 **/
 /* }}} */
 
@@ -55,15 +55,15 @@ int main(int argc, char *argv[]) {
 
     auto parent(getppid());
 
-    auto cydia(false);
+    auto phalena(false);
 
     struct stat correct;
-    if (lstat("/Applications/Cydia.app/Cydia", &correct) == -1) {
+    if (lstat("/Applications/Phalena.app/Phalena", &correct) == -1) {
         fprintf(stderr, "you have no arms left");
         return EX_NOPERM;
     }
 
-    launch_data_dict_iterate(response, [=, &cydia](const char *name, launch_data_t value) {
+    launch_data_dict_iterate(response, [=, &phalena](const char *name, launch_data_t value) {
         if (launch_data_get_type(value) != LAUNCH_DATA_DICTIONARY)
             return;
 
@@ -110,10 +110,10 @@ int main(int argc, char *argv[]) {
             return;
 
         if (correct.st_dev == check.st_dev && correct.st_ino == check.st_ino)
-            cydia = true;
+            phalena = true;
     });
 
-    if (!cydia) {
+    if (!phalena) {
         fprintf(stderr, "none shall pass\n");
         return EX_NOPERM;
     }
